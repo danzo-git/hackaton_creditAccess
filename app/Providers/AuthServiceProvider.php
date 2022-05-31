@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         Gate::define('manage-users',function($user){
 
-            return $user->hasAnyRole(['nouveau-agent','admin','rh',''])  ;
+            return $user->hasAnyRole(['nouveau-agent','admin','secretaire','','recouvreur'])  ;
         });
 
 
@@ -40,7 +40,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAnyRole(['admin'])  ;
         });
         Gate::define('manage-client',function($user){
-            return $user->hasAnyRole(['admin','g-compte'])  ;
+            return $user->hasAnyRole(['admin','recouvreur'])  ;
         });
         Gate::define('edit-users',function($user){
 

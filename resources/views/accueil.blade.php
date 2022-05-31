@@ -72,7 +72,7 @@
           <li class="dropdown"><a href="#"><span>Souscription</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
 
-              <li><a href="{{route('demande.form')}}">souscription au credit bail</a></li>
+              <li><a href="#">souscription au credit bail</a></li>
             </ul>
           </li>
           {{-- <li><a class="nav-link scrollto" href="#contact">Contact</a></li> --}}

@@ -32,31 +32,36 @@ route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
 });
 
 
-route::get('/info/{id}','BailController@client')->name('client.info');
+route::get('/info/{id}/','BailController@client')->name('client.info');
 route::get('/accueil',"BailController@accueil")->name('accueil');
 route::get('/client/{id}','BailController@connexion_client')->name('info.client');
-Route::get('/demande', "BailController@demande")->name('demande.form');
-Route::post('traitement','BailController@insertion')->name('client.insertion');
-route::post('/fournisseur_page','BailController@finsertion')->name('fournisseur.page');
+
+
+// route::post('/fournisseur_page','BailController@finsertion')->name('fournisseur.page');
 route::get('connexion','BailController@connexion')->name('form.connexion');
 Route::post('connexion_client','BailController@connexion_client')->name('client.connexion');
-route::get('/fournisseur','BailController@fournisseur')->name('form.fournisseur');
+route::post('/dossier',"BailController@createDossier")->name('client.dossier');
+
+// route::get('/fournisseur','BailController@fournisseur')->name('form.fournisseur');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dash','BailController@dash')->name('admin.dashboard');
-   route::get('/dashboard/{id}','BailController@valider')->name('client.valider');
-    route::get('/dashboard_bq/{id}','BailController@bloquer')->name('client.bloquer');
+    route::get('/doc',"BailController@dossier")->name('gestion.dossier');
+    route::get('/dashboard/{id}','BailController@valider')->name('client.valider');
+    // route::get('/dashboard_bq/{id}','BailController@bloquer')->name('client.bloquer');
     route::get('/liste','BailController@liste')->name('liste.dash');
     route::get('/contrat','BailController@contrat')->name('gestion.voir_contrat');
     route::get('/agent','BailController@agent')->name('gestion.agent');
     Route::patch('info/{id}', 'BailController@update')->name('client.update');
-//Route::get('modif/{id}/edit', 'BailController@edit')->name('client.edit');
+Route::get('modif/{id}/edit', 'BailController@edit')->name('client.edit');
+        route::post('/traitement','BailController@insertion')->name('client.insertion');
+        route::get('/demande', "BailController@demande")->name('client.create');
 
 Route::get('modif/{user}/edit', 'BailController@edit')->name('client.edit');
 });
 
 route::get('/facture/{id}','BailController@facture')->name('client.facture');
 
-route::get('/dash_fournisseur','BailController@dash_fournisseur');
+
 Route::get('/deconnexion', function(){
     auth()->logout();
     return redirect('/');

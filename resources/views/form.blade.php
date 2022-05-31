@@ -1,980 +1,517 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- JQUERY STEP -->
-    <script src=""></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
-<div class="wrapper">
-    <form action="{{route('client.insertion')}}" method="post">
-        @csrf
-        <div id="wizard">
-            <!-- SECTION 1 -->
-            <h4></h4>
-            <section>
-            nom
-                <div class="form-row"> <input type="text" name="nom" class="form-control" placeholder="nom"> </div>
-                  prenom
-                  <div class="form-row"> <input type="text"  name="prenom" class="form-control" placeholder="prenom"> </div>
-              date de naissance
-                  <div class="form-row"> <input type="date"   min="1950-01-01" max="2000-12-31"  name="naissance" class="form-control" placeholder="Date de naissance"> </div>
-                 Lieu de naissance
-                  <div class="form-row"> <input type="text" name="lieu" class="form-control" placeholder="Lieu de naissance"> </div>
-                  telephone
-
-
-                  <div class="form-row"> <input type="text"  name="telephone" class="form-control" placeholder="telephone "> </div>
-               Email
-                  <div class="form-row"> <input type="text" name="email" class="form-control" placeholder="Email "> </div>
-               Piece
-                  <div class="form-row"> <input type="file" name="piece" class="form-control" placeholder="Type de piece " required> </div>
-                    Situation Matrimoniale
-                  <div class="form-row"> <input type="text" name="matrimoniale" class="form-control" placeholder="Situation matrimoniale"> </div>
-                            Regime Matrimoniale
-                  <div class="form-row"> <input type="text" name="regime" class="form-control" placeholder="Regime matrimoniale"> </div>
-              Sexe
-                  <div class="form-row"> <select name="sexe" id="" >
-                    <option value="disabled"> sexe</option>
-                    <option value="homme">masculin</option>
-                    <option value="femme">feminin</option>
-                    <option value="autre">Autre</option>
-                    {{-- <option value=""></option> --}}
-
-                </select> </div>
-                Enfant
-                <div class="form-row"> <input type="text" name="enfant" class="form-control" placeholder="Nombre d'enfants"> </div>
-            </section> <!-- SECTION 2 -->
-            <h4></h4>
-            <section>
-                profession
-
-                <div class="form-row"> <input type="text" name="profession" class="form-control" placeholder="profession"> </div>
-                Profession Conjoint
-                <div class="form-row"> <input type="text" name="profession_conjoint" class="form-control" placeholder="profession du conjoint"> </div>
-                Employeur
-                <div class="form-row"> <input type="text" name="employeur" class="form-control" placeholder="employeur"> </div>
-                <div class="form-row"> <input type="text" name="adresse_pro" class="form-control" placeholder="adresse_pro"> </div>
-                <div class="form-row"> <input type="text" name="salaire" class="form-control" placeholder="salaire"> </div>
-                <div class="form-row"> <input type="text" name="phone_bureau" class="form-control" placeholder="Telephone bureau"> </div>
-                <div class="form-row"> <input type="text" name="loyer" class="form-control" placeholder="domiciliation   avis de prelevement de loyer"> </div>
-                {{-- <div class="form-row" style="margin-bottom: 18px"> <textarea name="" id="" class="form-control" placeholder="Any order note about delivery or special offer" style="height: 108px"></textarea> </div> --}}
-            </section> <!-- SECTION 3 -->
-            <h4></h4>
-            <section>
-                Type Mobilier
-                <div class="form-row"> <select name="type_materiel" class="form-control" placeholder="type materiel" id="" >
-                    <option value="Type Mobilier" disabled="disabled">Type Mobilier</option>
-                    <option value="mobilier informatique">mobilier informatique</option>
-                    <option value="mobilier de bureau">mobilier de bureau</option>
-                    <option value="vehicule">vehicule</option>
-
-                </select>
-
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Breeze Admin</title>
+    <link rel="stylesheet" href="{{asset('style/assets/vendors/mdi/css/materialdesignicons.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('style/assets/vendors/flag-icon-css/css/flag-icon.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('style/assets/vendors/css/vendor.bundle.base.css')}}" />
+    <link rel="stylesheet" href="{{asset('style/assets/vendors/font-awesome/css/font-awesome.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('style/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('style/assets/css/style.css')}}" />
+    <link rel="shortcut icon" href="{{('style/assets/images/favicon.png')}}" />
+    <!-- wizard form -->
+    <link rel="stylesheet" href="{{asset('style/assets/vendors/jquery-smartwizard/dist/css/smart_wizard.min.c')}}ss">
+    <link rel="stylesheet" href="{{asset('style/assets/vendors/jquery-nice-select/css/nice-select.c')}}ss">
+  </head>
+  <body>
+    <div class="container-scroller">
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
+              <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a>
+              <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+            </div>
+            <ul class="nav">
+              <li class="nav-item nav-profile">
+                <a href="#" class="nav-link">
+                  <div class="nav-profile-image">
+                    <img src="assets/images/faces/face1.jpg" alt="profile" />
+                    <span class="login-status online"></span>
+                    <!--change to offline or busy as needed-->
+                  </div>
+                  <div class="nav-profile-text d-flex flex-column pr-3">
+                    {{-- <span class="font-weight-medium mb-2">{{Auth::user()->name}}</span> --}}
+                  
+                    <input type="hidden"  value="{{$userRole=Auth::user()->roles('name')->get()->first()}}">
+                    {{Auth::user()->name}}
+                    <h6> agent connecté: {{$userRole->name}}</h6>
+      
+                    <span class="font-weight-normal">$8,753.00</span>
+                  </div>
+                  <span class="badge badge-danger text-white ml-3 rounded">3</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.dashboard')}}">
+                  <i class="mdi mdi-home menu-icon"></i>
+                  <span class="menu-title">Dashboard</span>
+                </a>
+              </li>
+              @can('manage-client')
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('liste.dash')}}" aria-expanded="false" aria-controls="ui-basic">
+                  <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                  <span class="menu-title">Gestion Client</span>
+                
+                </a>
+                
+              </li>
+              @endcan
+              @can('manage-contrat')
+              <li class="nav-item">
+                <a class="nav-link"href="{{route('gestion.voir_contrat')}}">
+                  <i class="mdi mdi-contacts menu-icon"></i>
+                  <span class="menu-title">Gestion Credit</span>
+                </a>
+              </li>
+              @endcan
+              @can('manage-agent')
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('gestion.agent')}}">
+                  <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                  <span class="menu-title">Gestion Agent</span>
+                </a>
+              </li>
+              @endcan
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('client.create')}}">
+                  <i class="mdi mdi-chart-bar menu-icon"></i>
+                  <span class="menu-title">Ajouter client</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="pages/tables/basic-table.html">
+                  <i class="mdi mdi-table-large menu-icon"></i>
+                  <span class="menu-title">Tables</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <span class="nav-link" href="#">
+                  <span class="menu-title">Docs</span>
+                </span>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://www.bootstrapdash.com/demo/breeze-free/documentation/documentation.html">
+                  <i class="mdi mdi-file-document-box menu-icon"></i>
+                  <span class="menu-title">Documentation</span>
+                </a>
+              </li>
+              <li class="nav-item sidebar-actions">
+                <div class="nav-link">
+                  <div class="mt-4">
+                    <div class="border-none">
+                      <p class="text-black">Notification</p>
+                    </div>
+                    <ul class="mt-4 pl-0">
+                      <li><a href="/deconnexion"> Sign Out</a></li>
+                    </ul>
+                  </div>
                 </div>
-                Designation
-                <div class="form-row"> <input type="text" name="designation"class="form-control" placeholder="designation"> </div>
-                <div class="form-row"> <!--input type="text" class="form-control" placeholder="categorie"-->
-                    {{-- <select name="categorie" id="" >
-                        <option value="vehicule">vehicule</option>
-                        <option value="informatique">informatique</option>
-                    </select> --}}
-
-                </div>
-                    Marque
-                <div class="form-row"> <input type="text"name="marque" class="form-control" placeholder="marque"> </div>
-
-                {{-- <div class="form-row"> <input type="text"name="fournisseur" class="form-control" placeholder="fournisseur"> </div> --}}
-                Nom fournisseur
-                <div class="form-row"> <input type="text"name="fnom" class="form-control" placeholder="nom fournisseur"> </div>
-              Email Fournisseur
-                <div class="form-row"> <input type="text"name="fmail" class="form-control" placeholder="E-mail fournisseur"> </div>
-                Nom telephone
-                <div class="form-row"> <input type="text"name="fphone" class="form-control" placeholder="telephone fournisseur"> </div>
-            </section> <!-- SECTION 4 -->
-            <h4></h4>
-            <section> <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                    <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" />
-                    <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " /> </svg>
-                <p class="success"> Demande Passé avec succes</p>
-            </section>
+              </li>
+            </ul>
+          </nav>
+      <div class="container-fluid page-body-wrapper">
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close mdi mdi-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-default-theme">
+            <div class="img-ss rounded-circle bg-light border mr-3"></div> Default
+          </div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme">
+            <div class="img-ss rounded-circle bg-dark border mr-3"></div> Dark
+          </div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles light"></div>
+            <div class="tiles dark"></div>
+          </div>
         </div>
-    </form>
-</div>
-<style>
-    * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box
-}
-
-body {
-    font-family: "Poppins-Regular";
-    font-size: 15px;
-    color: #666;
-    background-color: #6645eb;
-    margin: 0
-}
-
-:focus {
-    outline: none
-}
-
-textarea {
-    resize: none
-}
-
-input,
-textarea,
-select,
-button {
-    font-family: "Poppins-Regular";
-    font-size: 15px;
-    color: #666
-}
-
-ul {
-    padding: 0;
-    margin: 0;
-    list-style: none
-}
-
-img {
-    max-width: 100%;
-    vertical-align: middle
-}
-
-.wrapper {
-    max-width: 600px;
-    height: 100vh;
-    margin: auto;
-    display: flex;
-    align-items: center
-}
-
-.wrapper .image-holder {
-    width: 51%
-}
-
-.wrapper form {
-    width: 100%
-}
-
-.wizard>.steps .current-info,
-.wizard>.steps .number {
-    display: none
-}
-
-#wizard {
-    min-height: 570px;
-    background: #fff;
-    margin-right: 60px;
-    padding: 107px 75px 65px;
-    margin-top: 20px;
-    margin-bottom: 20px
-}
-
-.steps {
-    margin-bottom: 30px
-}
-
-.steps ul {
-    display: flex;
-    position: relative
-}
-
-.steps ul li {
-    width: 25%;
-    margin-right: 10px
-}
-
-.steps ul li a {
-    display: inline-block;
-    width: 100%;
-    height: 7px;
-    background: #e6e6e6;
-    border-radius: 3.5px
-}
-
-.steps ul li.first a,
-.steps ul li.checked a {
-    background: #6645eb;
-    transition: all 0.5s ease
-}
-
-.steps ul:before {
-    content: "  Etat civile ";
-    font-size: 22px;
-    font-family: "Poppins-SemiBold";
-    color: #333;
-    top: -38px;
-    position: absolute
-}
-
-.steps ul.step-2:before {
-    content: "Activite professionnelle"
-}
-
-.steps ul.step-3:before {
-    content: "Materiel"
-}
-
-.steps ul.step-4:before {
-    content: "patientez demande en cours"
-}
-
-h3 {
-    font-family: "Poppins-SemiBold"
-}
-
-.form-row {
-    margin-bottom: 24px
-}
-
-.form-row label {
-    margin-bottom: 8px;
-    display: block
-}
-
-.form-row.form-group {
-    display: flex
-}
-
-.form-row.form-group .form-holder {
-    width: 50%;
-    margin-right: 21px
-}
-
-.form-row.form-group .form-holder:last-child {
-    margin-right: 0
-}
-
-.form-holder {
-    position: relative
-}
-
-.form-holder i {
-    position: absolute;
-    top: 11px;
-    right: 19px;
-    font-size: 17px;
-    color: #999
-}
-
-.form-control {
-    height: 42px;
-    border: 1px solid #e6e6e6;
-    background: none;
-    width: 100%;
-    padding: 0 18px
-}
-
-.form-control:focus {
-    border-color: #f3d4b7
-}
-
-.form-control::-webkit-input-placeholder {
-    color: #999;
-    font-size: 13px
-}
-
-.form-control::-moz-placeholder {
-    color: #999;
-    font-size: 13px
-}
-
-.form-control:-ms-input-placeholder {
-    color: #999;
-    font-size: 13px
-}
-
-.form-control:-moz-placeholder {
-    color: #999;
-    font-size: 13px
-}
-
-textarea.form-control {
-    padding-top: 11px;
-    padding-bottom: 11px
-}
-
-.option {
-    color: #999
-}
-
-.actions ul {
-    display: flex;
-    margin-top: 30px;
-    justify-content: space-between
-}
-
-.actions ul.step-last {
-    justify-content: flex-end
-}
-
-.actions ul.step-last li:first-child {
-    display: none
-}
-
-.actions li a {
-    padding: 0;
-    border: none;
-    display: inline-flex;
-    height: 51px;
-    width: 135px;
-    align-items: center;
-    background: #6200EA;
-    cursor: pointer;
-    color: #fff !important;
-    position: relative;
-    padding-left: 41px;
-    text-decoration: none;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    font-weight: 400
-}
-
-.actions li a:before {
-    content: '\f178';
-    position: absolute;
-    top: 15px;
-    right: 41px;
-    color: #fff;
-    font-family: "FontAwesome";
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0)
-}
-
-.actions li a:hover {
-    background: #6200eaba
-}
-
-.actions li a:hover:before {
-    -webkit-animation-name: hvr-icon-wobble-horizontal;
-    animation-name: hvr-icon-wobble-horizontal;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-timing-function: ease-in-out;
-    animation-timing-function: ease-in-out;
-    -webkit-animation-iteration-count: 1;
-    animation-iteration-count: 1
-}
-
-.actions li[aria-disabled="true"] a {
-    display: none
-}
-
-.actions li:first-child a {
-    background: #e6e6e6;
-    padding-left: 48px
-}
-
-.actions li:first-child a:before {
-    content: '\f177';
-    left: 26px
-}
-
-.actions li:first-child a:hover {
-    background: #ccc
-}
-
-.actions li:last-child a {
-    padding-left: 29px;
-    width: 167px;
-    font-weight: 400
-}
-
-.actions li:last-child a:before {
-    right: 30px
-}
-
-.checkbox {
-    position: relative
-}
-
-.checkbox label {
-    padding-left: 21px;
-    cursor: pointer;
-    color: #999
-}
-
-.checkbox input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer
-}
-
-.checkbox input:checked~.checkmark:after {
-    display: block
-}
-
-.checkmark {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    height: 12px;
-    width: 13px;
-    border-radius: 2px;
-    background-color: #ebebeb;
-    border: 1px solid #ccc;
-    font-family: "Font Awesome";
-    color: #000;
-    font-size: 10px;
-    font-weight: bolder
-}
-
-.checkmark:after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-    content: '\f178'
-}
-
-.checkbox-circle {
-    margin-top: 41px;
-    margin-bottom: 46px
-}
-
-.checkbox-circle label {
-    cursor: pointer;
-    padding-left: 26px;
-    color: #999;
-    display: block;
-    margin-bottom: 15px;
-    position: relative
-}
-
-.checkbox-circle label.active .tooltip {
-    display: block
-}
-
-.checkbox-circle input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer
-}
-
-.checkbox-circle input:checked~.checkmark:after {
-    display: block
-}
-
-.checkbox-circle .checkmark {
-    position: absolute;
-    top: 11px;
-    left: 0;
-    height: 14px;
-    width: 14px;
-    border-radius: 50%;
-    background: #ebebeb;
-    border: 1px solid #cdcdcd
-}
-
-.checkbox-circle .checkmark:after {
-    content: "";
-    top: 6px;
-    left: 6px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #666666;
-    position: absolute;
-    display: none
-}
-
-.checkbox-circle .tooltip {
-    padding: 9px 22px;
-    background: #f2f2f2;
-    line-height: 1.8;
-    position: relative;
-    margin-top: 16px;
-    margin-bottom: 28px;
-    display: none
-}
-
-.checkbox-circle .tooltip:before {
-    content: "";
-    border-bottom: 10px solid #f2f2f2;
-    border-right: 9px solid transparent;
-    border-left: 9px solid transparent;
-    position: absolute;
-    bottom: 100%
-}
-
-.product {
-    margin-bottom: 33px
-}
-
-.item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 30px;
-    border-bottom: 1px solid #e6e6e6;
-    margin-bottom: 30px
-}
-
-.item:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border: none
-}
-
-.item .left {
-    display: flex;
-    align-items: center
-}
-
-.item .thumb {
-    display: inline-flex;
-    width: 100px;
-    height: 90px;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #f2f2f2
-}
-
-.item .purchase {
-    display: inline-block;
-    margin-left: 21px
-}
-
-.item .purchase h6 {
-    font-family: "Poppins-Medium";
-    font-size: 16px;
-    margin-bottom: 4px;
-    font-weight: 500
-}
-
-.item .purchase h6 a {
-    color: #333
-}
-
-.item .price {
-    font-size: 16px
-}
-
-.checkout {
-    margin-bottom: 44px
-}
-
-.checkout span.heading {
-    font-family: "Poppins-Medium";
-    font-weight: 500;
-    margin-right: 5px
-}
-
-.checkout .subtotal {
-    margin-bottom: 18px
-}
-
-.checkout .shipping {
-    margin-bottom: 19px
-}
-
-.checkout .shipping span.heading {
-    margin-right: 4px
-}
-
-.checkout .total-price {
-    font-family: "Muli-Bold";
-    color: #333;
-    font-weight: 700
-}
-
-@-webkit-keyframes hvr-icon-wobble-horizontal {
-    16.65% {
-        -webkit-transform: translateX(6px);
-        transform: translateX(6px)
-    }
-
-    33.3% {
-        -webkit-transform: translateX(-5px);
-        transform: translateX(-5px)
-    }
-
-    49.95% {
-        -webkit-transform: translateX(4px);
-        transform: translateX(4px)
-    }
-
-    66.6% {
-        -webkit-transform: translateX(-2px);
-        transform: translateX(-2px)
-    }
-
-    83.25% {
-        -webkit-transform: translateX(1px);
-        transform: translateX(1px)
-    }
-
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0)
-    }
-}
-
-@keyframes hvr-icon-wobble-horizontal {
-    16.65% {
-        -webkit-transform: translateX(6px);
-        transform: translateX(6px)
-    }
-
-    33.3% {
-        -webkit-transform: translateX(-5px);
-        transform: translateX(-5px)
-    }
-
-    49.95% {
-        -webkit-transform: translateX(4px);
-        transform: translateX(4px)
-    }
-
-    66.6% {
-        -webkit-transform: translateX(-2px);
-        transform: translateX(-2px)
-    }
-
-    83.25% {
-        -webkit-transform: translateX(1px);
-        transform: translateX(1px)
-    }
-
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0)
-    }
-}
-
-@media (max-width: 1500px) {
-    .wrapper {
-        height: auto
-    }
-}
-
-@media (max-width: 1199px) {
-    .wrapper {
-        height: 100vh
-    }
-
-    #wizard {
-        margin-right: 40px;
-        min-height: 829px;
-        padding-left: 60px;
-        padding-right: 60px
-    }
-}
-
-@media (max-width: 991px) {
-    .wrapper {
-        justify-content: center
-    }
-
-    .wrapper .image-holder {
-        display: none
-    }
-
-    .wrapper form {
-        width: 60%
-    }
-
-    #wizard {
-        margin-right: 0;
-        padding-left: 40px;
-        padding-right: 40px
-    }
-}
-
-@media (max-width: 767px) {
-    .wrapper {
-        height: auto;
-        display: block
-    }
-
-    .wrapper .image-holder {
-        width: 100%;
-        display: block
-    }
-
-    .wrapper form {
-        width: 100%
-    }
-
-    #wizard {
-        min-height: unset;
-        padding: 70px 20px 40px
-    }
-
-    .form-row.form-group {
-        display: block
-    }
-
-    .form-row.form-group .form-holder {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 24px
-    }
-
-    .item .purchase {
-        margin-left: 11px
-    }
-}
-
-.card {
-    border: 0;
-    border-radius: 0px;
-    margin-bottom: 30px;
-    -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
-    -webkit-transition: .5s;
-    transition: .5s
-}
-
-.padding {
-    padding: 3rem !important
-}
-
-h5.card-title {
-    font-size: 15px
-}
-
-.fw-400 {
-    font-weight: 400 !important
-}
-
-.card-title {
-    font-family: Roboto, sans-serif;
-    font-weight: 300;
-    line-height: 1.5;
-    margin-bottom: 0;
-    padding: 15px 20px;
-    border-bottom: 1px solid rgba(77, 82, 89, 0.07)
-}
-
-.card-body {
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    padding: 1.25rem
-}
-
-.form-group {
-    margin-bottom: 1rem
-}
-
-.form-control {
-    border-color: #ebebeb;
-    border-radius: 2px;
-    color: #8b95a5;
-    padding: 5px 12px;
-    font-size: 14px;
-    line-height: inherit;
-    -webkit-transition: 0.2s linear;
-    transition: 0.2s linear
-}
-
-.card-body>*:last-child {
-    margin-bottom: 0
-}
-
-.btn-primary {
-    background-color: #33cabb;
-    border-color: #33cabb;
-    color: #fff
-}
-
-.btn-bold {
-    font-family: Roboto, sans-serif;
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 12px
-}
-
-.btn-primary:hover {
-    background-color: #52d3c7;
-    border-color: #52d3c7;
-    color: #fff
-}
-
-.btn:hover {
-    cursor: pointer
-}
-
-.form-control:focus {
-    border-color: #6545eb;
-    color: #4d5259;
-    -webkit-box-shadow: 0 0 0 0.1rem rgba(51, 202, 187, 0);
-    box-shadow: 0 0 0 0.1rem rgba(101, 69, 235, 0)
-}
-
-.custom-radio {
-    cursor: pointer
-}
-
-.custom-control {
-    display: -webkit-box;
-    display: flex;
-    min-width: 18px
-}
-
-.heading {
-    color: #6645eb
-}
-
-.total {
-    float: right;
-    color: #6645eb
-}
-
-svg {
-    width: 100px;
-    display: block;
-    margin: 40px auto 0
-}
-
-.path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 0;
-
-    &.circle {
-        -webkit-animation: dash .9s ease-in-out;
-        animation: dash .9s ease-in-out
-    }
-
-    &.line {
-        stroke-dashoffset: 1000;
-        -webkit-animation: dash .9s .35s ease-in-out forwards;
-        animation: dash .9s .35s ease-in-out forwards
-    }
-
-    &.check {
-        stroke-dashoffset: -100;
-        -webkit-animation: dash-check .9s .35s ease-in-out forwards;
-        animation: dash-check .9s .35s ease-in-out forwards
-    }
-}
-
-p {
-    text-align: center;
-    margin: 20px 0 60px;
-    font-size: 1.25em;
-
-    &.success {
-        color: #73AF55
-    }
-
-    &.error {
-        color: #D06079
-    }
-}
-
-@-webkit-keyframes dash {
-    0% {
-        stroke-dashoffset: 1000
-    }
-
-    100% {
-        stroke-dashoffset: 0
-    }
-}
-
-@keyframes dash {
-    0% {
-        stroke-dashoffset: 1000
-    }
-
-    100% {
-        stroke-dashoffset: 0
-    }
-}
-
-@-webkit-keyframes dash-check {
-    0% {
-        stroke-dashoffset: -100
-    }
-
-    100% {
-        stroke-dashoffset: 900
-    }
-}
-
-@keyframes dash-check {
-    0% {
-        stroke-dashoffset: -100
-    }
-
-    100% {
-        stroke-dashoffset: 900
-    }
-}
-</style>
-<script>
-    $(function(){
-$("#wizard").steps({
-headerTag: "h4",
-bodyTag: "section",
-transitionEffect: "fade",
-enableAllSteps: true,
-transitionEffectSpeed: 500,
-onStepChanging: function (event, currentIndex, newIndex) {
-if ( newIndex === 1 ) {
-$('.steps ul').addClass('step-2');
-} else {
-$('.steps ul').removeClass('step-2');
-}
-if ( newIndex === 2 ) {
-$('.steps ul').addClass('step-3');
-} else {
-$('.steps ul').removeClass('step-3');
-}
-
-if ( newIndex === 3 ) {
-$('.steps ul').addClass('step-4');
-$('.actions ul').addClass('step-last');
-setTimeout(function(){$('form').submit()}, 1000);
-} else {
-$('.steps ul').removeClass('step-4');
-$('.actions ul').removeClass('step-last');
-}
-
-return true;
-},
-labels: {
-finish: "valider",
-next: "Suivant",
-previous: "Precedent"
-}
-});
-// Custom Steps Jquery Steps
-$('.wizard > .steps li a').click(function(){
-$(this).parent().addClass('checked');
-$(this).parent().prevAll().addClass('checked');
-$(this).parent().nextAll().removeClass('checked');
-});
-// Custom Button Jquery Steps
-$('.forward').click(function(){
-$("#wizard").steps('next');
-})
-$('.backward').click(function(){
-$("#wizard").steps('previous');
-})
-// Checkbox
-$('.checkbox-circle label').click(function(){
-$('.checkbox-circle label').removeClass('active');
-$(this).addClass('active');
-})
-})
-</script>
-</body>
+        <nav class="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
+          <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
+            <a class="navbar-brand brand-logo-mini align-self-center d-lg-none" href="index.html"><img src="../assets/images/logo-mini.svg" alt="logo" /></a>
+            <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
+              <i class="mdi mdi-menu"></i>
+            </button>
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                  <i class="mdi mdi-bell-outline"></i>
+                  <span class="count count-varient1">7</span>
+                </a>
+                <div class="dropdown-menu navbar-dropdown navbar-dropdown-large preview-list" aria-labelledby="notificationDropdown">
+                  <h6 class="p-3 mb-0">Notifications</h6>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <img src="../assets/images/faces/face4.jpg" alt="" class="profile-pic" />
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="mb-0"> Dany Miles <span class="text-small text-muted">commented on your photo</span>
+                      </p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <img src="../assets/images/faces/face3.jpg" alt="" class="profile-pic" />
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="mb-0"> James <span class="text-small text-muted">posted a photo on your wall</span>
+                      </p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <img src="../assets/images/faces/face2.jpg" alt="" class="profile-pic" />
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="mb-0"> Alex <span class="text-small text-muted">just mentioned you in his post</span>
+                      </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <p class="p-3 mb-0">View all activities</p>
+                </div>
+              </li>
+              <li class="nav-item dropdown d-none d-sm-flex">
+                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown">
+                  <i class="mdi mdi-email-outline"></i>
+                  <span class="count count-varient2">5</span>
+                </a>
+                <div class="dropdown-menu navbar-dropdown navbar-dropdown-large preview-list" aria-labelledby="messageDropdown">
+                  <h6 class="p-3 mb-0">Messages</h6>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-item-content flex-grow">
+                      <span class="badge badge-pill badge-success">Request</span>
+                      <p class="text-small text-muted ellipsis mb-0"> Suport needed for user123 </p>
+                    </div>
+                    <p class="text-small text-muted align-self-start"> 4:10 PM </p>
+                  </a>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-item-content flex-grow">
+                      <span class="badge badge-pill badge-warning">Invoices</span>
+                      <p class="text-small text-muted ellipsis mb-0"> Invoice for order is mailed </p>
+                    </div>
+                    <p class="text-small text-muted align-self-start"> 4:10 PM </p>
+                  </a>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-item-content flex-grow">
+                      <span class="badge badge-pill badge-danger">Projects</span>
+                      <p class="text-small text-muted ellipsis mb-0"> New project will start tomorrow </p>
+                    </div>
+                    <p class="text-small text-muted align-self-start"> 4:10 PM </p>
+                  </a>
+                  <h6 class="p-3 mb-0">See all activity</h6>
+                </div>
+              </li>
+              <li class="nav-item nav-search border-0 ml-1 ml-md-3 ml-lg-5 d-none d-md-flex">
+                <form class="nav-link form-inline mt-2 mt-md-0">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" />
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="mdi mdi-magnify"></i>
+                      </span>
+                    </div>
+                  </div>
+                </form>
+              </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right ml-lg-auto">
+              <li class="nav-item dropdown d-none d-xl-flex border-0">
+                <a class="nav-link dropdown-toggle" id="languageDropdown" href="#" data-toggle="dropdown">
+                  <i class="mdi mdi-earth"></i> English </a>
+                <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
+                  <a class="dropdown-item" href="#"> French </a>
+                  <a class="dropdown-item" href="#"> Spain </a>
+                  <a class="dropdown-item" href="#"> Latin </a>
+                  <a class="dropdown-item" href="#"> Japanese </a>
+                </div>
+              </li>
+              <li class="nav-item nav-profile dropdown border-0">
+                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <img class="nav-profile-img mr-2" alt="" src="../assets/images/faces/face1.jpg" />
+                  <span class="profile-name">Henry Klein</span>
+                </a>
+                <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="#">
+                    <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </div>
+        </nav>
+        <div class="main-panel">
+          <div class="content-wrapper pb-0">
+            <div class="page-header flex-wrap">
+              <h3 class="mb-0"> Bienvenue Admin 
+              </h3>
+              <div class="d-flex">
+                
+                <button type="button" class="btn btn-sm bg-white btn-icon-text border ml-3">
+                  <i class="mdi mdi-printer btn-icon-prepend"></i> Rapport général </button>
+              </div>
+            </div>
+            
+             <div class="row">
+                <div class="col-xl-12 col-xxl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Demand de dossier</h4>
+                        </div>
+                        <div class="card-body">
+                            <div id="smartwizard" class="form-wizard order-create">
+                                <ul class="nav nav-wizard">
+                                    <li><a class="nav-link" href="#wizard_Service"> 
+                                        <span>1</span> 
+                                    </a></li>
+                                    <li><a class="nav-link" href="#wizard_Time">
+                                        <span>2</span>
+                                    </a></li>
+                                    {{-- <li><a class="nav-link" href="#wizard_Details">
+                                        <span>3</span>
+                                    </a></li>
+                                    <li><a class="nav-link" href="#wizard_Payment">
+                                        <span>4</span>
+                                    </a></li> --}}
+                                </ul>
+                                <form action="{{route('client.insertion')}}" id="form"  method="POST">
+                                    @csrf
+                                    <div class="tab-content">
+                                        <div id="wizard_Service" class="tab-pane" role="tabpanel">
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-2">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Nom*</label>
+                                                        <input type="text" name="nom" class="form-control" placeholder="Parsley" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-2">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Prenom*</label>
+                                                        <input type="text" name="prenom" class="form-control" placeholder="Montana" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-2">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Adresse actuelle*</label>
+                                                        <input type="Text" name="adresse" class="form-control" id="inputGroupPrepend2" aria-describedby="inputGroupPrepend2" placeholder="" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-2">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Date de naissance*</label>
+                                                        <input type="date" name="naissance" class="form-control"  required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Profession*</label>
+                                                        <input type="text" name="profession" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Sexe*</label>
+                                                        <select name="sexe" id="" class="form-control">
+    
+                                                            <option value="Homme">Homme</option>
+                                                            <option value="Femme">Femme</option>
+                                                            <option value="Non-Binaire">Non-Binaire</option>
+                                                            <option value="Autre">Autre</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Commune de naissance*</label>
+                                                        <input type="text" name="com_naiss" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Nationalité*</label>
+                                                        <input type="text" name="nationalite" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Commune de résidence*</label>
+                                                        <input type="text" name="com_res" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Nombre de dépendants*</label>
+                                                        <input type="number" name="dependants" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">No. téléphone résidence*</label>
+                                                        <input type="text" name="telephone" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Adresse mail*</label>
+                                                        <input type="Email" name="email" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                {{-- <div class="col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">CNI,ATTESTATIN ou PASSPORT*</label>
+                                                        <input type="file" name="cni" class="form-control" required="">
+                                                    </div>
+                                                </div> --}}
+                                                <div class="col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">salaire*</label>
+                                                        <input type="text" name="salaire" class="form-control" required="">
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div id="wizard_Time" class="tab-pane" role="tabpanel">
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-2">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Etat civil*</label>
+                                                        <select name="regime" id="" class="form-control" required>
+                                                            <option value="Homme">Marié(e)</option>
+                                                            <option value="Femme">Union libre</option>
+                                                            <option value="Non-Binaire">Veuf(ve)</option>
+                                                            <option value="Autre">Separé(e)</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-2">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Date de mariage*</label>
+                                                        <input type="date" class="form-control"  placeholder="" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-2">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Regime matrimonial*</label>
+                                                        <select name="matrimoniale" id="" class="form-control" required>
+                                                            <option value="Homme">Communauté de biens</option>
+                                                            <option value="Femme">Séparation de bien</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-2">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Nom du conjoint*</label>
+                                                        <input type="text" name="nom_conjoint" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-2">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Prenom du conjoint*</label>
+                                                        <input type="text" name="prenom_conjoint" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-2">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Date de naissance du conjoint*</label>
+                                                        <input type="date" name="date_conjoint" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-2">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Commune de naissance du conjoint*</label>
+                                                        <input type="text" name="com_naiss_con" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-2">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Commune de résidence du conjoint*</label>
+                                                        <input type="text" name="com_res_con" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">Sexe du conjoint*</label>
+                                                        <select name="sexe_con" id="" class="form-control">
+    
+                                                            <option value="Homme">Homme</option>
+                                                            <option value="Femme">Femme</option>
+                                                            <option value="Non-Binaire">Non-Binaire</option>
+                                                            <option value="Autre">Autre</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="text-label form-label">CNI,ATTESTATIN ou PASSPORT*</label>
+                                                        <input type="file" name="cni" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                          
+                                            </div>
+                                        </div>
+                                      <button onclick="document.getElementById('form').submit() " type="submit"  class="btn btn-primary" >envoyer</button>
+                                        
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+         
+          </div>
+          <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard template</a> from Bootstrapdash.com</span>
+            </div>
+          </footer>
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{{asset('style/assets/vendors/js/vendor.bundle.base.js')}}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{{asset('style/assets/vendors/flot/jquery.flot.js')}}"></script>
+    <script src="{{asset('style/assets/vendors/flot/jquery.flot.resize.js')}}"></script>
+    <script src="{{asset('style/assets/vendors/flot/jquery.flot.categories.js')}}"></script>
+    <script src="{{asset('style/assets/vendors/flot/jquery.flot.fillbetween.js')}}"></script>
+    <script src="{{asset('style/assets/vendors/flot/jquery.flot.stack.js')}}"></script>
+    <script src="{{asset('style/assets/vendors/flot/jquery.flot.pie.js')}}"></script>
+    <script src="{{asset('style/assets/vendors/chart.js/Chart.min.js')}}"></script>
+    <script src="{{asset('style/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
+    
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{{asset('style/assets/js/off-canvas.js')}}"></script>
+    <script src="{{asset('style/assets/js/hoverable-collapse.js')}}"></script>
+    <script src="{{asset('style/assets/js/misc.js')}}"></script>
+    <script src="{{asset('style/assets/js/chart.js')}}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    {{-- <script src="{{asset('style/assets/js/dashboard.js')}}"></script> --}}
+    <!-- End custom js for this page -->
+    <!-- wizard form -->
+    <script src="{{asset('style/assets/vendors/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{asset('style/assets/vendors/jquery-smartwizard/dist/js/jquery.smartWizard.js')}}"></script>
+    <script>
+		$(document).ready(function(){
+			// SmartWizard initialize
+			$('#smartwizard').smartWizard(); 
+		});
+	</script>
+  </body>
 </html>

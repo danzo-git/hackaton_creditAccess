@@ -30,7 +30,9 @@
                         <div class="badge"> <span>Design</span> </div>
                     </div>
                     <div class="mt-5">
-                        <h3 class="heading"> votre mot de passe:{{ $details['mdp'] }}</h3>
+                        <h3 class="heading">
+                            vous avez rescu un credit de {{$details["montant"]}} suite a votre demande
+                            votre mot de passe:{{ $details['mdp'] }}</h3>
                         <div class="mt-5">
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>

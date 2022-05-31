@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Client;
+use App\Dossier;
 use App\User;
 use App\Contrat;
 use \App\Mail\SendMail;
@@ -29,19 +30,27 @@ class BailController extends Controller
                 $client=\DB::select('select * from clients', [1]);
 
 
-                return view('dashboard')->with('client',$client);
+                return view('credit_dash')->with('client',$client);
         }
 
      public function valider($id){
+         $queries= \DB::table('clients')->where('id',$id)
+             ->get();
+         $doc=\DB::table('dossiers')->where('id',$id)->get();
+           //->join('dossiers', 'clients.id', '=', 'dossiers.id_client')
+        //->join('orders', 'users.id', '=', 'orders.user_id')
+           // ->select('clients.nom',  'dossiers.but_credit',"dossiers.montant")
+             //->where('id',$id)
 
+         dd($doc);
        // $client=\DB::select('select * from clients where id='.$id);
-        $clients= \DB::table('clients')->get()->where('id',$id)->first();
+        $clients= \DB::table('clients')->get()->where("id",$id)->first();
 
         //$clients->update(['isclient'=>1]);
         $r=\DB::table('clients')->where('id',$id)->update(['isclient'=>1]);
 
         //  dd($clients->email);
-    $this->mailsend($clients->mdp,$clients->email);
+    $this->mailsend($clients->mdp,$clients->email,$queries->montant);
 
         return redirect()->back();
 
@@ -91,7 +100,7 @@ class BailController extends Controller
     public function connexion_client(request $request ){
         //&& Client::where('mdp',$request->mdp)->exists()
 
-     if(Client::where('email', $request->email)->exists() && Client::where('isclient',1)->exists() &&
+     if(Client::where('email', $request->email)->exists()  &&
         Client::where('mdp',$request->mdp)->exists()){
 
             $client= \DB::table('clients')->get()->where('email',$request->email)->first();
@@ -108,14 +117,11 @@ class BailController extends Controller
 
     public function client($id){
         $clients= \DB::table('clients')->get()->where('id',$id)->first();
-        $contrat=Contrat::all();
+        // $contrat=Contrat::all();
        $contrat= \DB::table('contrats')->where('id_client',$clients->id)->get();
-       // $contrat=Contrat::all()->where('id_client',$clients->id)->first();
-        // $contrat=\DB::select('select * from contrats where id_client ='.$clients->id);
-            // $contrat->implode('type_materiel',',');
-      //  select('select * from contrats where  ='.$clients->id)->get();
 
-         return view('client')->with(['clients'=>$clients,'contrat'=>$contrat]);
+
+         return view('client')->with(['clients'=>$clients]);
      }
 
 
@@ -140,26 +146,37 @@ class BailController extends Controller
         // $request->sexe,$request->photo,$request->email,$request->solde,$request->mdp)');
           //
 
-        \DB::table('clients')->insert(["nom"=>$request->nom,
+        \DB::table('clients')->insert([
         "prenom"=>$request->prenom,
         'nom'=>$request->nom,
         'naissance'=>$request->naissance,
-        'lieu'=>$request->lieu,
+
+        // 'lieu'=>$request->lieu,
         'profession'=>$request->profession,
         'sexe'=>$request->sexe,
-        'piece'=>$request->piece,
+        'cni'=>$request->cni,
         'matrimoniale'=>$request->matrimoniale,
         'regime'=>$request->regime,
         'sexe'=>$request->sexe,
-        'profession_conjoint'=>$request->profession_conjoint,
-        'employeur'=>$request->employeur,
-        'adresse_pro'=>$request->adresse_pro,
+        'sexe_con'=>$request->sexe_con,
+        'date_conjoint'=>$request->date_conjoint,
+        'dependants'=>$request->dependants,
+        'nom_conjoint'=>$request->nom_conjoint,
+        'prenom_conjoint'=>$request->prenom_conjoint,
+        'profession'=>$request->profession,
+        'adresse'=>$request->adresse,
         'salaire'=>$request->salaire,
-        'phone_bureau'=>$request->phone_bureau,
+        'telephone'=>$request->telephone,
+        'com_naiss'=>$request->com_naiss,
+        'com_naiss_con'=>$request->com_naiss_con,
+        'com_res'=>$request->com_res,
+        'com_res_con'=>$request->com_res_con,
+        'nationalite'=>$request->nationalite,
+        // 'res_con'=>$request->res_con,
+        // 'cni'=>$request->cni,
 
 
-
-        'enfant'=>$request->enfant,
+        // 'enfant'=>$request->enfant,
         // 'photo'=>$request->photo=$imageName,
 
         'email'=>$request->email,
@@ -169,21 +186,11 @@ class BailController extends Controller
         // 'solde'=>0,
         //  'mdp'=>$request->mdp,
         // 'created_at'=>now()
+         // $this->mailsend($request->email, $request->nom);
+    //    \app\Http\Controllers\clientController\mailsend();
     ]);
     // $clients= \DB::table('clients')->get()->where('id',$id)->first();
-$clients=Client::orderBy('id', 'desc')->first()->id;
 
-    \DB::table('contrats')->insert([
-    'fnom'=>$request->fnom,
-        'id_client'=>$clients,
-        'fmail'=>$request->fmail,
-        'fphone'=>$request->fphone,
-    'designation'=>$request->designation,
-    'type_materiel'=>$request->type_materiel,
-    'marque'=>$request->marque,
-    // 'categorie'=>$request->categorie,
-    'loyer'=>$request->loyer,
-    ]);
 
     // $contrat=Contrat::orderBy('id', 'desc')->first()->id;
 
@@ -201,8 +208,7 @@ $clients=Client::orderBy('id', 'desc')->first()->id;
     //     // 'categorie'=>$request->categorie,
     //     'loyer'=>$request->loyer,
     //     ]);
-        // $this->mailsend($request->email, $request->nom);
-    //    \app\Http\Controllers\clientController\mailsend();
+
         return redirect()->route('accueil')->with('info','inscription reussie vous recevrez vos informations par mail si la demande est accepté !!!');
 
     }
@@ -266,9 +272,24 @@ public function agent(){
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createDossier(request $request )
     {
-        //
+        \DB::table('dossiers')->insert([
+            "montant"=>$request->montant,
+            'bulletin'=>$request->bulletin,
+            //'but_credit'=>$request->but_credit,
+            'date_debut'=>$request->date_debut,
+            "but_credit"=>$request->but_credit,
+            "credit"=>$request->credit,
+            "partenaire"=>$request->partenaire,
+            "benef"=>$request->benef,
+            "situation"=>$request->situation,
+            "id_client"=>$request->id_client,
+
+            // 'lieu'=>$request->lieu,
+
+        ]);
+        return redirect()->back()->with('info','inscription reussie vous recevrez vos informations par mail si la demande est accepté !!!');
     }
 
 
@@ -398,6 +419,23 @@ public function agent(){
 
         return redirect()->route('client.index')->with('info','super modification');
     }
+
+
+
+public function dossier(){
+//    $query = $butCredit ? Dossier::whereSlug($butCredit)->firstOrFail()->Client() : Client::query();
+//    $client = $query->oldest('nom')->paginate(5);
+//        $dossier=Dossier::all();
+       // $client=Client::where();
+
+   $queries= \DB::table('clients')
+        ->join('dossiers', 'clients.id', '=', 'dossiers.id_client')
+//        ->join('orders', 'users.id', '=', 'orders.user_id')
+        ->select('clients.nom', "clients.id", 'dossiers.but_credit',"dossiers.montant")
+        ->get();
+        return view('dossier',compact("queries"));
+
+}
 
     /**
      * Remove the specified resource from storage.

@@ -43,6 +43,7 @@
                       @endforeach
                     </tbody>
                   </table>
+                  <a href="/dash">retour</a>
                 <div class="card-body">
                     {{-- @if (session('status'))
                         <div class="alert alert-success" role="alert">
