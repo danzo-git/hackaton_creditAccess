@@ -29,6 +29,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('sujet:Activation de compte client')->view('email.sendMail');
+        return $this->subject('sujet:CreditAccess')->view('email.sendMail');
     }
 }

@@ -34,24 +34,21 @@ class BailController extends Controller
         }
 
      public function valider($id){
-         $queries= \DB::table('clients')->where('id',$id)
-             ->get();
-         $doc=\DB::table('dossiers')->where('id',$id)->get();
-           //->join('dossiers', 'clients.id', '=', 'dossiers.id_client')
-        //->join('orders', 'users.id', '=', 'orders.user_id')
-           // ->select('clients.nom',  'dossiers.but_credit',"dossiers.montant")
-             //->where('id',$id)
 
-         dd($doc);
+         $doc=\DB::table('dossiers')->where('id_client',$id)->first();
+
+
+
        // $client=\DB::select('select * from clients where id='.$id);
-        $clients= \DB::table('clients')->get()->where("id",$id)->first();
-
+        $clients= \DB::table('clients')->get()->where("id",$doc->id)->first();
+//         dd($clients,$doc);
         //$clients->update(['isclient'=>1]);
         $r=\DB::table('clients')->where('id',$id)->update(['isclient'=>1]);
-
+//         \DB::table('comptes')->where('id_client',$id)->insert(["credit"=>0,'id_client'=>$id]);
         //  dd($clients->email);
-    $this->mailsend($clients->mdp,$clients->email,$queries->montant);
-
+   //$this->mailsend($clients->mdp,$clients->email,$doc->montant);
+\DB::table('comptes')->where('id_client',$id)->update(["credit"=>$doc->montant,'id_client'=>$id]);
+//dd($doc->montant);
         return redirect()->back();
 
      }
@@ -74,24 +71,13 @@ class BailController extends Controller
         // $clients=\DB::select('select nom from clients where isclient=1', [1]);
      // $clients= \DB::table('clients')->where('isclient',1)->first();
 
-      $clients=Client::where('isclient',1)->get();
-      // dd($clients->id);
+          $clients=\DB::select('select * from clients', [1]);
           return view('liste',compact('clients'));
       }
 
-     public function fournisseur(){
-         return view('fournisseur');
-     }
 
-    //  public function isclient(){
-    //      //on recupere dans la bdd
-    //      //si on veut le connecter on verifie
 
-    //      if(\DB::table('clients')->get()->where('isclient',1)){
-    //         return redirect()->route('connexion');
 
-    //      }
-    //  }
     public function connexion(){
         return view('connexion');
     }
@@ -117,8 +103,8 @@ class BailController extends Controller
 
     public function client($id){
         $clients= \DB::table('clients')->get()->where('id',$id)->first();
-        // $contrat=Contrat::all();
-       $contrat= \DB::table('contrats')->where('id_client',$clients->id)->get();
+
+
 
 
          return view('client')->with(['clients'=>$clients]);
@@ -136,9 +122,7 @@ class BailController extends Controller
     }
 
 
-    // public function affiche_facture($id){
-    //    $contrat= Contrat::find($id);
-    //    dd($contrat);
+
 
     // }
     public function insertion(request $request){
@@ -151,7 +135,7 @@ class BailController extends Controller
         'nom'=>$request->nom,
         'naissance'=>$request->naissance,
 
-        // 'lieu'=>$request->lieu,
+
         'profession'=>$request->profession,
         'sexe'=>$request->sexe,
         'cni'=>$request->cni,
@@ -172,79 +156,61 @@ class BailController extends Controller
         'com_res'=>$request->com_res,
         'com_res_con'=>$request->com_res_con,
         'nationalite'=>$request->nationalite,
-        // 'res_con'=>$request->res_con,
-        // 'cni'=>$request->cni,
-
-
-        // 'enfant'=>$request->enfant,
-        // 'photo'=>$request->photo=$imageName,
-
         'email'=>$request->email,
         'telephone'=>$request->telephone,
         'isclient'=>0,
         'mdp'=> Str::random(3).''.rand( 10000, 99999 ),
-        // 'solde'=>0,
-        //  'mdp'=>$request->mdp,
-        // 'created_at'=>now()
+
          // $this->mailsend($request->email, $request->nom);
     //    \app\Http\Controllers\clientController\mailsend();
     ]);
-    // $clients= \DB::table('clients')->get()->where('id',$id)->first();
+   // $clients= \DB::table('clients')->where('id', $request->id)->first();
+        $clients=Client::orderBy('id', 'desc')->first()->id;
+
+//
 
 
-    // $contrat=Contrat::orderBy('id', 'desc')->first()->id;
+     \DB::table('comptes')->insert([
 
-    // \DB::table('materiel_demandes')->insert([
-    //     'id_contrat'=>$contrat,
-    //     'id_client'=>$clients,
-    //     'fnom'=>$request->fnom,
-    //         'id_client'=>$clients,
-    //         'fmail'=>$request->fmail,
-    //         'fphone'=>$request->fphone,
-    //     'designation'=>$request->designation,
-    //     'type_materiel'=>$request->type_materiel,
-    //     'marque'=>$request->marque,
-    //     'nom'=>'',
-    //     // 'categorie'=>$request->categorie,
-    //     'loyer'=>$request->loyer,
-    //     ]);
+         'id_client'=>$clients,
+         'credit'=>0,
+        // "id_dossier"=>1,
+
+
+             'montant_rembourser'=>0,
+             'debit'=>0,
+
+
+         ]);
+//        $id_dossier=\DB::table("dossiers")
+//            ->join('comptes','dossiers.id',"=","comptes.id_dossier")
+//            ->select("comptes.id_dossier")
+//            ->get();
+//        dd($id_dossier);
 
         return redirect()->route('accueil')->with('info','inscription reussie vous recevrez vos informations par mail si la demande est accepté !!!');
 
     }
-    public function finsertion(request $request){
 
-          //
-
-        \DB::table('fournisseurs')->insert(["nom_prenom"=>$request->nom_prenom,
-
-        'telephone'=>$request->telephone,
-        'adresse'=>$request->adresse,
-        'email'=>$request->email,
-        'pays'=>$request->pays,
-        'isfournisseur'=>0,
-        'mdp'=>$request->mdp
-    ]);
 
 
         // $this->mailsend($request->email, $request->nom);
     //    \app\Http\Controllers\clientController\mailsend();
 
 
-    }
+
 // info_client
 
-    public function dash_fournisseur(){
-        return view('dash_fournisseur');
-    }
 
-    public function mailsend($mdp,$email){
+
+    public function mailsend($mdp,$email,$montant){
 
         $details=[
-            'nom'=>"CreditBail Agence",
-            'title'=>'CreditBail',
+            'nom'=>"CreditAccess Agence",
+            'title'=>'CreditAccess',
             'body'=>'ceci est votre code d activation',
             'mdp'=>$mdp,
+            'montant'=>$montant,
 
         ];
        // \DB::select('select email from client where id_client ='.$clients->id);
@@ -254,11 +220,19 @@ class BailController extends Controller
         return view('home');
     }
 
-public function contrat(){
-    $client=\DB::select('select * from clients', [1]);
+public function credit(){
+    $queries= \DB::table('clients')
+        ->join('comptes', 'clients.id', '=', 'comptes.id_client')
+//        ->join('orders', 'users.id', '=', 'orders.user_id')
+        ->select('comptes.credit', "clients.nom",
+            "clients.id",
+            "comptes.montant_rembourser"
+        )
+        ->get();
 
 
-    return view('voir_contrat')->with('client',$client);
+
+    return view('contrat')->with('queries',$queries);
 }
 
 public function agent(){
@@ -276,6 +250,8 @@ public function agent(){
     {
         \DB::table('dossiers')->insert([
             "montant"=>$request->montant,
+            "status"=>0,
+
             'bulletin'=>$request->bulletin,
             //'but_credit'=>$request->but_credit,
             'date_debut'=>$request->date_debut,
@@ -285,6 +261,7 @@ public function agent(){
             "benef"=>$request->benef,
             "situation"=>$request->situation,
             "id_client"=>$request->id_client,
+            'date_fin'=>$request->date_fin,
 
             // 'lieu'=>$request->lieu,
 
@@ -423,19 +400,40 @@ public function agent(){
 
 
 public function dossier(){
-//    $query = $butCredit ? Dossier::whereSlug($butCredit)->firstOrFail()->Client() : Client::query();
-//    $client = $query->oldest('nom')->paginate(5);
-//        $dossier=Dossier::all();
-       // $client=Client::where();
+
 
    $queries= \DB::table('clients')
         ->join('dossiers', 'clients.id', '=', 'dossiers.id_client')
 //        ->join('orders', 'users.id', '=', 'orders.user_id')
-        ->select('clients.nom', "clients.id", 'dossiers.but_credit',"dossiers.montant")
+        ->select('clients.nom', "clients.isclient",
+           "clients.id", 'dossiers.but_credit',
+           "dossiers.montant","dossiers.date_fin",
+       "dossiers.status")
         ->get();
+//   if($queries->date_fin->get()<now()){
+//       $status=\DB::table('dossiers')->update(['status'=>1]);
+//   }
         return view('dossier',compact("queries"));
 
 }
+
+    public function dossier_accueil(){
+
+
+        $queries= \DB::table('clients')
+            ->join('dossiers', 'clients.id', '=', 'dossiers.id_client')
+//        ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->select('clients.nom', "clients.isclient",
+                "clients.id", 'dossiers.but_credit',
+                "dossiers.montant","dossiers.date_fin",
+                "dossiers.status")
+            ->get();
+//   if($queries->date_fin->get()<now()){
+//       $status=\DB::table('dossiers')->update(['status'=>1]);
+//   }
+        return view('credit_dash',compact("queries"));
+
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -447,4 +445,31 @@ public function dossier(){
     // {
     //     //
     // }
+
+    public function verifie_status($id){
+        $status=\DB::table("dossiers")->first();
+       // dd($status->status);
+        if($status->date_fin>now()){
+        \DB::table('dossiers')->where('id',$id)->update(['status'=>1]);
+            $status=\DB::table('dossiers')->get()->where('id',$id)->first();
+           // $stat;
+
+            return redirect()-> back()->with('message','le delai a ete depassé');
+        }{
+          $stat=  \DB::table('dossiers')->where('id',$id)->update(['status'=>0]);
+
+            return redirect()-> back()->with('message','le delai a ete depassé',compact('stat'));
+        }
+
+    }
+
+    public function remboursement(Request $request){
+       
+        \DB::table('comptes')->where("id_client",$request->id)->update([
+
+            "montant_rembourser"=>$request->montant_rembourser,
+        ]);
+        return redirect()->back();
+    }
 }
+

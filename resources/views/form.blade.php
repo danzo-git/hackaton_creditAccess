@@ -33,11 +33,11 @@
                   </div>
                   <div class="nav-profile-text d-flex flex-column pr-3">
                     {{-- <span class="font-weight-medium mb-2">{{Auth::user()->name}}</span> --}}
-                  
+
                     <input type="hidden"  value="{{$userRole=Auth::user()->roles('name')->get()->first()}}">
                     {{Auth::user()->name}}
                     <h6> agent connecté: {{$userRole->name}}</h6>
-      
+
                     <span class="font-weight-normal">$8,753.00</span>
                   </div>
                   <span class="badge badge-danger text-white ml-3 rounded">3</span>
@@ -54,14 +54,14 @@
                 <a class="nav-link" href="{{route('liste.dash')}}" aria-expanded="false" aria-controls="ui-basic">
                   <i class="mdi mdi-crosshairs-gps menu-icon"></i>
                   <span class="menu-title">Gestion Client</span>
-                
+
                 </a>
-                
+
               </li>
               @endcan
               @can('manage-contrat')
               <li class="nav-item">
-                <a class="nav-link"href="{{route('gestion.voir_contrat')}}">
+                <a class="nav-link"href="{{route('gestion.credit')}}">
                   <i class="mdi mdi-contacts menu-icon"></i>
                   <span class="menu-title">Gestion Credit</span>
                 </a>
@@ -249,15 +249,15 @@
         <div class="main-panel">
           <div class="content-wrapper pb-0">
             <div class="page-header flex-wrap">
-              <h3 class="mb-0"> Bienvenue Admin 
+              <h3 class="mb-0"> Bienvenue Admin
               </h3>
               <div class="d-flex">
-                
+
                 <button type="button" class="btn btn-sm bg-white btn-icon-text border ml-3">
                   <i class="mdi mdi-printer btn-icon-prepend"></i> Rapport général </button>
               </div>
             </div>
-            
+
              <div class="row">
                 <div class="col-xl-12 col-xxl-12">
                     <div class="card">
@@ -267,8 +267,8 @@
                         <div class="card-body">
                             <div id="smartwizard" class="form-wizard order-create">
                                 <ul class="nav nav-wizard">
-                                    <li><a class="nav-link" href="#wizard_Service"> 
-                                        <span>1</span> 
+                                    <li><a class="nav-link" href="#wizard_Service">
+                                        <span>1</span>
                                     </a></li>
                                     <li><a class="nav-link" href="#wizard_Time">
                                         <span>2</span>
@@ -319,7 +319,7 @@
                                                     <div class="mb-3">
                                                         <label class="text-label form-label">Sexe*</label>
                                                         <select name="sexe" id="" class="form-control">
-    
+
                                                             <option value="Homme">Homme</option>
                                                             <option value="Femme">Femme</option>
                                                             <option value="Non-Binaire">Non-Binaire</option>
@@ -374,7 +374,7 @@
                                                         <label class="text-label form-label">salaire*</label>
                                                         <input type="text" name="salaire" class="form-control" required="">
                                                     </div>
-                                                </div> 
+                                                </div>
                                             </div>
                                         </div>
                                         <div id="wizard_Time" class="tab-pane" role="tabpanel">
@@ -439,7 +439,7 @@
                                                     <div class="mb-3">
                                                         <label class="text-label form-label">Sexe du conjoint*</label>
                                                         <select name="sexe_con" id="" class="form-control">
-    
+
                                                             <option value="Homme">Homme</option>
                                                             <option value="Femme">Femme</option>
                                                             <option value="Non-Binaire">Non-Binaire</option>
@@ -453,21 +453,21 @@
                                                         <input type="file" name="cni" class="form-control" required="">
                                                     </div>
                                                 </div>
-                          
+
                                             </div>
                                         </div>
                                       <button onclick="document.getElementById('form').submit() " type="submit"  class="btn btn-primary" >envoyer</button>
-                                        
+
                                     </div>
                                 </form>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-      
-         
+
+
           </div>
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -493,7 +493,7 @@
     <script src="{{asset('style/assets/vendors/flot/jquery.flot.pie.js')}}"></script>
     <script src="{{asset('style/assets/vendors/chart.js/Chart.min.js')}}"></script>
     <script src="{{asset('style/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
-    
+
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="{{asset('style/assets/js/off-canvas.js')}}"></script>
@@ -510,7 +510,7 @@
     <script>
 		$(document).ready(function(){
 			// SmartWizard initialize
-			$('#smartwizard').smartWizard(); 
+			$('#smartwizard').smartWizard();
 		});
 	</script>
   </body>

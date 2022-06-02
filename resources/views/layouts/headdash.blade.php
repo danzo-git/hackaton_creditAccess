@@ -12,10 +12,11 @@
     <link rel="stylesheet" href="{{('style/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" />
     <link rel="stylesheet" href="{{('style/assets/css/style.css')}}" />
     <link rel="shortcut icon" href="{{('style/assets/images/favicon.png')}}" />
-   
+
+
   </head>
   <body>
-    
+
       @yield('content')
   </body>
   <script src="{{asset('style/assets/vendors/js/vendor.bundle.base.js')}}"></script>
@@ -40,5 +41,6 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="{{asset('style/assets/js/dashboard.js')}}"></script>
+
     <!-- End custom js for this page -->
 </html>

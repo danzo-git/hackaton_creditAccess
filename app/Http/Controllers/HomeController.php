@@ -26,6 +26,6 @@ class HomeController extends Controller
 
         $client=\DB::select('select * from clients', [1]);
 
-        return view('dashboard')->with('client',$client);
+        return view('credit_dash')->with('client',$client);
     }
 }

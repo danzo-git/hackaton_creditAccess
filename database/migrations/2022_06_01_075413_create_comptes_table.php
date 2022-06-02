@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDossiersTable extends Migration
+class CreateComptesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,11 @@ class CreateDossiersTable extends Migration
      */
     public function up()
     {
-        Schema::create('dossiers', function (Blueprint $table) {
+        Schema::create('comptes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string("montant");
-            $table->string("bulletin");
-            //$table->string("but");
-            $table->date('date_debut');
-            $table->date('date_fin');
-            $table->string("but_credit");
-            $table->string("credit");
-            $table->string("partenaire");
-            $table->Integer("status");
-            $table->string("benef");
-            $table->string("situation");
+            $table->Integer('credit');
+            $table->Integer('debit');
+            $table->Integer('montant_rembourser');
             $table->unsignedBigInteger('id_client');
             $table->foreign('id_client')
                 ->references('id')
@@ -33,6 +25,12 @@ class CreateDossiersTable extends Migration
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
 
+//            $table->unsignedBigInteger('id_dossier');
+//            $table->foreign('id_dossier')
+//                ->references('id')
+//                ->on('dossiers')
+//                ->onDelete('restrict')
+//                ->onUpdate('restrict');
 
             $table->timestamps();
         });
@@ -45,6 +43,6 @@ class CreateDossiersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dossiers');
+        Schema::dropIfExists('comptes');
     }
 }

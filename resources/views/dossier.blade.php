@@ -44,7 +44,7 @@
                 @endcan
                 @can('manage-contrat')
                     <li class="nav-item">
-                        <a class="nav-link"href="{{route('gestion.voir_contrat')}}">
+                        <a class="nav-link"href="{{route('gestion.credit')}}">
                             <i class="mdi mdi-contacts menu-icon"></i>
                             <span class="menu-title">Gestion Credit</span>
                         </a>
@@ -310,61 +310,7 @@
                         </div>
 
                     <div class="row">
-                        <div class="col-xl-8 col-sm-6 grid-margin stretch-card">
-                            <div class="card">
-                                <div class="card-body px-0 overflow-auto">
-                                    <h4 class="card-title pl-4">Dossier en attente</h4>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead class="bg-light">
-                                            <tr>
-                                                <th>Dossiers</th>
-                                                <th>Date</th>
-                                                <th>Statut</th>
-                                                <th>Montant Demandé</th>
-                                                <th>decision</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($queries as $query)
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/faces/face1.jpg" alt="image" />
-                                                        <div class="table-user-name ml-3">
-{{--                                                            @php--}}
-{{--                                                                $clients= \DB::table('clients')->get()->first();--}}
-{{--                                                                // dd($clients);--}}
-{{--                                                            @endphp--}}
-
-                                                             <p class="mb-0 font-weight-medium"> {{$query->nom}} </p>
-                                                            <small> Payment on hold</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>24/05/2022 11:11</td>
-                                                <td>
-                                                    <div class="badge badge-inverse-success"> A jour </div>
-                                                </td>
-                                                <td>{{intval($query->montant)}}</td>
-
-                                                <td > <a href="{{route("client.valider","$query->id")}}">accepter</a> </td>
-                                            </tr>
-                                            @endforeach
-
-
-
-
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <a class="text-black mt-3 d-block pl-4" href="#">
-                                        <span class="font-weight-medium h6">View all order history</span>
-                                        <i class="mdi mdi-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                      @include('layouts.historique')
                         <div class="col-xl-4 col-md-6 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
@@ -420,6 +366,7 @@
                                     </div>
                                     <div class="row py-1">
                                         <div class="col-sm-7">
+                                            <div class="row">
                                             <div class="row">
                                                 <div class="col-4 col-sm-4">
                                                     <img class="customer-img" src="assets/images/faces/face5.jpg" alt="" />

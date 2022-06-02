@@ -17,7 +17,7 @@
             </div>
             <div class="nav-profile-text d-flex flex-column pr-3">
               {{-- <span class="font-weight-medium mb-2">{{Auth::user()->name}}</span> --}}
-            
+
               <input type="hidden"  value="{{$userRole=Auth::user()->roles('name')->get()->first()}}">
               {{Auth::user()->name}}
               <h6> agent connecté: {{$userRole->name}}</h6>
@@ -38,9 +38,9 @@
           <a class="nav-link" href="{{route('liste.dash')}}" aria-expanded="false" aria-controls="ui-basic">
             <i class="mdi mdi-crosshairs-gps menu-icon"></i>
             <span class="menu-title">Gestion Client</span>
-          
+
           </a>
-          
+
         </li>
         @endcan
         @can('manage-contrat')
@@ -236,7 +236,7 @@
             <h3 class="mb-0"> Bienvenue Mr {{Auth::user()->name}} listes des clients en attentes
             </h3>
             <div class="d-flex">
-              
+
               <button type="button" class="btn btn-sm bg-white btn-icon-text border ml-3">
                 <i class="mdi mdi-printer btn-icon-prepend"></i> Rapport général </button>
             </div>
@@ -246,7 +246,7 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nom & Prennom</th>
+                <th scope="col">Nom & Prenom</th>
                 <th scope="col">Profession</th>
                 <th scope="col">Type de materiel</th>
                 <th scope="col">loyer</th>
@@ -255,31 +255,31 @@
                 {{-- <th scope="col">action</th> --}}
               </tr>
             </thead>
-            @foreach ($clients as $client )
-           @php
-                 $contrat=\DB::table('contrats')->where('id_client',$client->id)->first();
-           @endphp
+
+
             <tbody>
+            @foreach($clients as $client)
+
               <tr>
                 <th scope="row">{{$client->id}}</th>
-                <td> {{$client->nom}}</td>
+                <td> {{$client->nom ." ". $client->prenom}}</td>
                 <td>{{$client->profession}}</td>
-                <td>{{$contrat->type_materiel}}</td>
-                <td> {{$contrat->loyer}}</td>
-                {{-- <td>{{$client->}}</td> --}}
-                <td>{{$contrat->fnom}}</td>
+{{--                <td>{{$client->type_materiel}}</td>--}}
+{{--                <td> {{$contrat->loyer}}</td>--}}
+{{--                --}}{{-- <td>{{$client->}}</td> --}}
+{{--                <td>{{$contrat->fnom}}</td>--}}
                 <td>
                 </td>
 
               </tr>
-
+            @endforeach
             </tbody>
 
 
-            @endforeach
+
           </table>
         </div>
-       
+
         </div>
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">

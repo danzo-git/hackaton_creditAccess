@@ -12,7 +12,7 @@
     <ul>
       <h1>  {{ $details['title'] }}</h1>
       <h3> </h3>
-        <img src="'image/packs-163497.jpg'" alt="" srcset="">
+{{--        <img src="'image/packs-163497.jpg'" alt="" srcset="">--}}
     </ul>
 
 

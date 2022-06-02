@@ -45,7 +45,7 @@
         @endcan
         @can('manage-contrat')
         <li class="nav-item">
-          <a class="nav-link"href="{{route('gestion.voir_contrat')}}">
+          <a class="nav-link"href="{{route('gestion.credit')}}">
             <i class="mdi mdi-contacts menu-icon"></i>
             <span class="menu-title">Gestion Credit</span>
           </a>
@@ -268,8 +268,11 @@
                     <div class="card-body px-3 py-4">
                       <div class="d-flex justify-content-between align-items-start">
                         <div class="color-card">
+                            @php
+                            $dossier=count(\DB::Table('dossiers')->get());
+                            @endphp
                           <p class="mb-0 color-card-head">Dossiers</p>
-                          <h2 class="text-white"> $5,300.<span class="h5">00</span>
+                          <h2 class="text-white"> {{$dossier}}
                           </h2>
                         </div>
                         <i class="card-icon-indicator mdi mdi-cube-outline bg-inverse-icon-danger"></i>
@@ -404,7 +407,7 @@
                       <thead class="bg-light">
                         <tr>
                           <th>Dossiers</th>
-                          <th>Date</th>
+                          <th>Date de remboursement</th>
                           <th>Statut</th>
                           <th>Montant</th>
                         </tr>
@@ -596,67 +599,8 @@
 
           <div class="row">
 
-            <div class="col-xl-4 grid-margin stretch-card">
-              <!--activity-->
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <span class="d-flex justify-content-between">
-                      <span>Historique de rapport</span>
-                      <span class="dropdown dropleft d-block">
-                        <span id="dropdownMenuButton1" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                          <span><i class="mdi mdi-dots-horizontal"></i></span>
-                        </span>
-                        <span class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <a class="dropdown-item" href="#">Contact</a>
-                          <a class="dropdown-item" href="#">Helpdesk</a>
-                          <a class="dropdown-item" href="#">Chat with us</a>
-                        </span>
-                      </span>
-                    </span>
-                  </h4>
-                  <ul class="gradient-bullet-list border-bottom">
-                    <li>
-                      <h6 class="mb-0"> It's awesome when we find a new solution </h6>
-                      <p class="text-muted">2h ago</p>
-                    </li>
-                    <li>
-                      <h6 class="mb-0">Report has been updated</h6>
-                      <p class="text-muted">
-                        <span>2h ago</span>
-                        <span class="d-inline-block">
-                          <span class="d-flex d-inline-block">
-                            <img class="ml-1" src="assets/images/faces/face1.jpg" alt="" />
-                            <img class="ml-1" src="assets/images/faces/face10.jpg" alt="" />
-                            <img class="ml-1" src="assets/images/faces/face14.jpg" alt="" />
-                          </span>
-                        </span>
-                      </p>
-                    </li>
-                    <li>
-                      <h6 class="mb-0"> Analytics dashboard has been created#Slack </h6>
-                      <p class="text-muted">2h ago</p>
-                    </li>
-                    <li>
-                      <h6 class="mb-0"> It's awesome when we find a new solution </h6>
-                      <p class="text-muted">2h ago</p>
-                    </li>
-                  </ul>
-                  <a class="text-black mt-3 mb-0 d-block h6" href="#">View all <i class="mdi mdi-chevron-right"></i></a>
-                </div>
-              </div>
-              <!--activity ends-->
-            </div>
-            <div class="col-xl-8 col-md-6 grid-margin stretch-card">
-              <!--datepicker-->
-              <div class="card">
-                <div class="card-body">
-                  <div id="inline-datepicker" class="datepicker table-responsive"></div>
-                </div>
-              </div>
-              <!--datepicker ends-->
-            </div>
-          </div>
+
+
 
         </div>
         <footer class="footer">

@@ -1,3 +1,5 @@
+
+@if(\Auth()->user())
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -106,7 +108,7 @@
                   <p class="text-black">Notification</p>
                 </div>
                 <ul class="mt-4 pl-0">
-                  <li>Sign Out</li>
+                 <a href="/deconnexion"><li>Sign Out</li></a>
                 </ul>
               </div>
             </div>
@@ -482,3 +484,8 @@
 	</script>
   </body>
 </html>
+@else
+<script>
+    window.location.href = "/connexion"
+</script>
+@endif
