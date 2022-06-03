@@ -497,10 +497,13 @@ public function dossier(){
             id_recouvreur => $request->id,
         ]);
     }
-        public function tous_recouvreurs(){
-               $recouvreurs= recouvreurs::all();
-               return view('layouts.historique',compact('recouvreurs'));
-        }
+//        public function valider_recouv($id,$recouvreurs){
+//
+//              \DB::table('dossiers')->where("id_client",$id)->update([
+//                 "id_recouvreur"=>$recouvreurs,
+//              ]);
+//               return back();
+//        }
 
 
 }

@@ -13,7 +13,7 @@
                             <th>Montant Demandé</th>
                             <th>decision</th>
                             <th>recouvreur</th>
-
+                            <th>confirmer recouvreurs</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -53,20 +53,30 @@
 
 
 
-                                        <a href="#">bloquer le compte</a>
+                                        <a href="{{route('client.bloquer',"$query->id")}}">bloquer le compte</a>
                                     @else
                                         <a href="{{route("client.valider","$query->id")}}">accepter</a>
                                 </td>
                                 @endif
 
                                 <td>
-                                    @foreach($recouvreurs as $recouvreur)
-                                    <select name="recouvreurs" id="">
+                                    @php
+                                        $recouvreurs= \DB::table('recouvreurs')->get();
+
+                                    @endphp
+
+                                    <select name="recouvreurs" >
+                                        @foreach($recouvreurs as $recouvreur)
                                         <option value="{{$recouvreur->id}}"  >
                                             {{$recouvreur->nom}}
                                         </option>
+                                        @endforeach
                                     </select>
-                                    @endforeach
+
+                                </td>
+                                <td>
+
+{{--                                    <a href="{{route('gestion.valider_recouvreur',"$query->id,$recouvreur->id")}}">choix recouvreurs</a>--}}
                                 </td>
                             </tr>
                         @endforeach

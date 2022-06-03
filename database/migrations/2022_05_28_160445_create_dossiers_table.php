@@ -33,12 +33,7 @@ class CreateDossiersTable extends Migration
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
 
-            $table->unsignedBigInteger('id_recouvreur');
-            $table->foreign('id_recouvreur')
-                ->references('id')
-                ->on('dossiers')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+
 
 
 

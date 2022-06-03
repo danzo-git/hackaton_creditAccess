@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
     route::get('/doc',"BailController@dossier")->name('gestion.dossier');
 
     route::get('/dashboard/{id}','BailController@valider')->name('client.valider');
-    // route::get('/dashboard_bq/{id}','BailController@bloquer')->name('client.bloquer');
+     route::get('/dashboard_bq/{id}','BailController@bloquer')->name('client.bloquer');
     route::get('/liste','BailController@liste')->name('liste.dash');
     route::get('/credit','BailController@credit')->name('gestion.credit');
     route::post('/remboursement/','BailController@remboursement')->name('gestion.remboursement');
@@ -61,6 +61,7 @@ Route::get('/status/{id}','BailController@verifie_status')->name('verifie.status
 Route::get('admin//user/{user}/edit', 'BailController@edit')->name('client.edit');
 route::get('/recouvreurs','BailController@recouvreurs')->name('gestion.recouvreurs');
 route::post('store',"BailController@store_recouvreur")->name('gestion.enregistrement');
+//route::get('/valide_recouv','BailController@valider_recouv')->name('gestion.valider_recouvreur');
 });
 
 route::get('/facture/{id}','BailController@facture')->name('client.facture');
