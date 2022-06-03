@@ -17,7 +17,7 @@
             </div>
             <div class="nav-profile-text d-flex flex-column pr-3">
               {{-- <span class="font-weight-medium mb-2">{{Auth::user()->name}}</span> --}}
-            
+
               <input type="hidden"  value="{{$userRole=Auth::user()->roles('name')->get()->first()}}">
               {{Auth::user()->name}}
               <h6> agent connecté: {{$userRole->name}}</h6>
@@ -38,14 +38,14 @@
           <a class="nav-link" href="{{route('liste.dash')}}" aria-expanded="false" aria-controls="ui-basic">
             <i class="mdi mdi-crosshairs-gps menu-icon"></i>
             <span class="menu-title">Gestion Client</span>
-          
+
           </a>
-          
+
         </li>
         @endcan
         @can('manage-contrat')
         <li class="nav-item">
-          <a class="nav-link"href="{{route('gestion.voir_contrat')}}">
+          <a class="nav-link"href="{{route('gestion.credit')}}">
             <i class="mdi mdi-contacts menu-icon"></i>
             <span class="menu-title">Gestion Credit</span>
           </a>
@@ -236,7 +236,7 @@
             <h3 class="mb-0"> Bienvenue Mr {{Auth::user()->name}}
             </h3>
             <div class="d-flex">
-              
+
               <button type="button" class="btn btn-sm bg-white btn-icon-text border ml-3">
                 <i class="mdi mdi-printer btn-icon-prepend"></i> Rapport général </button>
             </div>
@@ -253,7 +253,7 @@
                           <div class="col-md-8">
                               <div class="card">
                                   <div class="card-header">Liste des administrateurs</div>
-  
+
                                   <table class="table">
                                       <thead>
                                         <tr>
@@ -271,7 +271,7 @@
                                           <td> {{ $item->name}}</td>
                                           <td>{{ $item->email}}</td>
                                           <td>{{implode(',', $item->roles()->get()->pluck('name')->toArray())}}</td>
-  
+
                                           <td>
                                               @can('edit-users')
                                               <a href="{{route('client.edit',$item->id)}}"><button class="btn btn-primary">editer</button></a>
@@ -281,7 +281,7 @@
                                                   @csrf
                                                   @method('DELETE')
                                                   <button class="btn btn-warning">supprimer</button>
-  
+
                                               </form>
                                               @endcan
                                               {{-- <a href=""><button class="btn btn-success">editer</button></a> --}}
@@ -296,20 +296,20 @@
                                               {{ session('status') }}
                                           </div>
                                       @endif --}}
-  
-  
-  
-  
+
+
+
+
                                   </div>
                               </div>
                           </div>
                       </div>
                   </div>
-  
+
           </div>
-         
-        
-       
+
+
+
         </div>
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">

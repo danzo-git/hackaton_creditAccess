@@ -18,6 +18,7 @@ class CreateComptesTable extends Migration
             $table->Integer('credit');
             $table->Integer('debit');
             $table->Integer('montant_rembourser');
+            $table->Integer('reste_payer');
             $table->unsignedBigInteger('id_client');
             $table->foreign('id_client')
                 ->references('id')

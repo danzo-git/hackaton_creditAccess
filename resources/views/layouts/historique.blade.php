@@ -1,8 +1,8 @@
 
-    <div class="col-xl-8 col-sm-6 grid-margin stretch-card">
+    <div class="col-xl-12 col-sm-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body px-0 overflow-auto">
-                <h4 class="card-title pl-4">Dossier en attente</h4>
+                <h4 class="card-title pl-8">Dossier en attente</h4>
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="bg-light">
@@ -12,6 +12,8 @@
                             <th>Statut</th>
                             <th>Montant Demandé</th>
                             <th>decision</th>
+                            <th>recouvreur</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -53,8 +55,19 @@
 
                                         <a href="#">bloquer le compte</a>
                                     @else
-                                        <a href="{{route("client.valider","$query->id")}}">accepter</a> </td>
+                                        <a href="{{route("client.valider","$query->id")}}">accepter</a>
+                                </td>
                                 @endif
+
+                                <td>
+                                    @foreach($recouvreurs as $recouvreur)
+                                    <select name="recouvreurs" id="">
+                                        <option value="{{$recouvreur->id}}"  >
+                                            {{$recouvreur->nom}}
+                                        </option>
+                                    </select>
+                                    @endforeach
+                                </td>
                             </tr>
                         @endforeach
 

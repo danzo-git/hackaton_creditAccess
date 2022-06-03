@@ -268,7 +268,7 @@
                                                         <img src="assets/images/faces/face1.jpg" alt="image" />
                                                         <div class="table-user-name ml-3">
 
-
+                                                                {{$query->id}}
                                                              <p class="mb-0 font-weight-medium">{{$query->nom}}  </p>
                                                             <small> Payment on hold</small>
                                                         </div>
@@ -278,51 +278,55 @@
                                                 <td>
                                                     <div class="badge badge-inverse-success"> {{$query->montant_rembourser}} </div>
                                                 </td>
-                                                <td>{{$query->credit-$query->montant_rembourser}}</td>
+                                                <td>{{intval($query->credit)-intval($query->montant_rembourser)}}</td>
+
                                                 <td>
+
                                                     <!-- Button trigger modal -->
+
+
+
+
+                                                    <!-- Button trigger modal -->
+{{--                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--}}
+{{--                                                        Launch--}}
+{{--                                                    </button>--}}
                                                     <!-- Full screen modal -->
+{{--                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
+{{--                                                        <div class="modal-dialog">--}}
+{{--                                                            <div class="modal-content">--}}
+{{--                                                                <div class="modal-header">--}}
+{{--                                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>--}}
+{{--                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+{{--                                                                </div>--}}
 
-
-
-
-                                                    <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                        Launch
-                                                    </button>
-
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
                                                                 <form method="post" action="{{route('gestion.remboursement')}}">
                                                                     @csrf
 
-                                                                        <input type="hidden"  name="id"   value="{{$query->id}}" class="form-control">
+                                                                    <input type="hidden"  name="id"  value="{{$query->id}}"  class="form-control">
 
 
-                                                                        <input type="text" name="montant_rembourser" class="form-control" placeholder="entrer le montant">
+                                                                    <input type="text" name="montant_rembourser" class="form-control" placeholder="entrer le montant">
 
 
 
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                                </div>
+{{--                                                                    <div class="modal-footer">--}}
+{{--                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>--}}
+{{--                                                                        <button type="submit" class="btn btn-primary">Save changes</button>--}}
+{{--                                                                    </div>--}}
                                                                 </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+                                                    <!-- Modal -->
+
 
 
                                                 </td>
                                             </tr>
 
                                                 @endforeach
+
 
 
                                         <!-- Modal -->
@@ -341,6 +345,7 @@
 
                                             </tbody>
                                         </table>
+
                                     </div>
 
                                 </div>

@@ -280,6 +280,23 @@
                                         <span>4</span>
                                     </a></li> --}}
                                 </ul>
+                                @if(session()->has('info'))
+                                    <div class="card">
+                                        @include('layouts.notification')
+                                        <script>
+                                            Swal.fire({
+                                                position: 'top-end',
+                                                icon: 'success',
+                                                title: "{{session('info') }}",
+                                                showConfirmButton: false,
+                                                timer: 1500
+                                            })
+                                        </script>
+
+
+                                        <div>
+
+                                @endif
                                 <form action="{{route('client.insertion')}}" id="form"  method="POST">
                                     @csrf
                                     <div class="tab-content">

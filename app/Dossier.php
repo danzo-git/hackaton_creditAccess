@@ -11,4 +11,8 @@ class Dossier extends Model
     {
         return $this->hasMany(Client::class);
     }
+    public function recouvreurs()
+    {
+        return $this->hasMany(recouvreurs::class);
+    }
 }

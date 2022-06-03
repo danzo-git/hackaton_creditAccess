@@ -1,4 +1,5 @@
 @extends('layouts.headdash')
+
 @section('content')
     <div class="container-scroller">
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -58,35 +59,34 @@
                         </a>
                     </li>
                 @endcan
+                @can('add-client')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('client.create')}}">
+                            <i class="mdi mdi-chart-bar menu-icon"></i>
+                            <span class="menu-title">Ajouter client</span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('manage-folder')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route("gestion.dossier")}}">
+                            <i class="mdi mdi-table-large menu-icon"></i>
+                            <span class="menu-title">Gestion des dossiers</span>
+                        </a>
+                    </li>
+                @endcan
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('client.create')}}">
-                        <i class="mdi mdi-chart-bar menu-icon"></i>
-                        <span class="menu-title">Ajouter client</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route("gestion.dossier")}}">
+                    <a class="nav-link" href="{{route("gestion.recouvreurs")}}">
                         <i class="mdi mdi-table-large menu-icon"></i>
-                        <span class="menu-title">Gestion des dossiers</span>
+                        <span class="menu-title">Gestion des Recouvreurs</span>
                     </a>
                 </li>
-                <li class="nav-item">
-          <span class="nav-link" href="#">
-            <span class="menu-title">Docs</span>
-          </span>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://www.bootstrapdash.com/demo/breeze-free/documentation/documentation.html">
-                        <i class="mdi mdi-file-document-box menu-icon"></i>
-                        <span class="menu-title">Documentation</span>
-                    </a>
-                </li>
+
                 <li class="nav-item sidebar-actions">
                     <div class="nav-link">
                         <div class="mt-4">
-                            <div class="border-none">
-                                <p class="text-black">Notification</p>
-                            </div>
+
                             <ul class="mt-4 pl-0">
                                 <li><a href="/deconnexion"> Sign Out</a></li>
                             </ul>
@@ -217,10 +217,9 @@
                                 <span class="profile-name">{{Auth::user()->name }}</span>
                             </a>
                             <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+
+                                <a class="dropdown-item" href="/deconnexion">
+                                    <i class="mdi mdi-logout mr-2 text-primary"></i> Deconnexion </a>
                             </div>
                         </li>
                     </ul>
@@ -235,94 +234,50 @@
                         <h3 class="mb-0"> Bienvenue Mr {{Auth::user()->name}}
                         </h3>
                         <div class="d-flex">
-
+                            @if(session()->has('info'))
+                                <div class="notification is-success bg-success">
+                                    <span class="text-white d-flex justify-content-center">{{ session('info') }}</span>
+                                </div>
+                            @endif
                             <button type="button" class="btn btn-sm bg-white btn-icon-text border ml-3">
                                 <i class="mdi mdi-printer btn-icon-prepend"></i> Rapport général </button>
                         </div>
                     </div>
-                    <div class="row ">
-                        <div class="col-xl-3 col-lg-12 stretch-card grid-margin">
-                            <div class="row">
-                                <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
-                                    <div class="card bg-warning">
-                                        <div class="card-body px-3 py-4">
-                                            <div class="d-flex justify-content-between align-items-start">
-                                                <div class="color-card">
-                                                    @php
-                                                        $clients= count(\DB::table("clients")->get());
-                                                    @endphp
 
-                                                    <p class="mb-0 color-card-head">Nombres de Clients </p>
-                                                    <h2 class="text-white"> {{$clients}}<span class="h5"></span>
-                                                    </h2>
-                                                </div>
-                                                <i class="card-icon-indicator mdi mdi-basket bg-inverse-icon-warning"></i>
-                                            </div>
-                                            <h6 class="text-white">300.000.000 fcfa de credit total</h6>
-                                        </div>
+                    <div class="row">
+                        <div class="col-xl-8 col-sm-6 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body px-0 overflow-auto">
+                                    <h4 class="card-title pl-4">recouvreurs enregistrement</h4>
+                                    <div class="table-responsive">
+
                                     </div>
-                                </div>
-                                <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
-                                    <div class="card bg-danger">
-                                        <div class="card-body px-3 py-4">
-                                            <div class="d-flex justify-content-between align-items-start">
-                                                <div class="color-card">
-                                                    <p class="mb-0 color-card-head">Dossiers</p>
-                                                    <h2 class="text-white"> $5,300.<span class="h5">00</span>
-                                                    </h2>
-                                                </div>
-                                                <i class="card-icon-indicator mdi mdi-cube-outline bg-inverse-icon-danger"></i>
-                                            </div>
-                                            <h6 class="text-white">13.21% Since last month</h6>
-                                        </div>
+                                    <div class="container">
+                                        <form method="post" id="form" action="{{route('gestion.enregistrement')}}"  >
+                                            @csrf
+                                            <input type="text" placeholder="nom" name="nom" class="form-control" >
+                                            <input type="text" placeholder="prenom" name="prenom" class="form-control">
+
+                                             <bouton onclick="document.getElementById('form').submit()"  class="btn btn-danger mt-2">soumettre</bouton >
+                                        </form>
                                     </div>
-                                </div>
-                                <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3">
-                                    <div class="card bg-primary">
-                                        <div class="card-body px-3 py-4">
-                                            <div class="d-flex justify-content-between align-items-start">
-                                                <div class="color-card">
-                                                    <p class="mb-0 color-card-head">Orders</p>
-                                                    <h2 class="text-white"> $1,753.<span class="h5">00</span>
-                                                    </h2>
-                                                </div>
-                                                <i class="card-icon-indicator mdi mdi-briefcase-outline bg-inverse-icon-primary"></i>
-                                            </div>
-                                            <h6 class="text-white">67.98% Since last month</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-12 col-md-6 stretch-card pb-sm-3 pb-lg-0">
-                                    <div class="card bg-success">
-                                        <div class="card-body px-3 py-4">
-                                            <div class="d-flex justify-content-between align-items-start">
-                                                <div class="color-card">
-                                                    <p class="mb-0 color-card-head">Affiliate</p>
-                                                    <h2 class="text-white">2368</h2>
-                                                </div>
-                                                <i class="card-icon-indicator mdi mdi-account-circle bg-inverse-icon-success"></i>
-                                            </div>
-                                            <h6 class="text-white">20.32% Since last month</h6>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
-                        @include('layouts.historique')
+
+                    </div>
+
                     <div class="row">
 
 
 
 
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard template</a> from Bootstrapdash.com</span>
                     </div>
-                </footer>
+
+                </div>
+                <!-- main-panel ends -->
             </div>
-            <!-- main-panel ends -->
+            <!-- page-body-wrapper ends -->
         </div>
-        <!-- page-body-wrapper ends -->
-    </div>
 @endsection

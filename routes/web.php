@@ -59,6 +59,8 @@ Route::get('modif/{id}/edit', 'BailController@edit')->name('client.edit');
         route::get('/demande', "BailController@demande")->name('client.create');
 Route::get('/status/{id}','BailController@verifie_status')->name('verifie.status');
 Route::get('admin//user/{user}/edit', 'BailController@edit')->name('client.edit');
+route::get('/recouvreurs','BailController@recouvreurs')->name('gestion.recouvreurs');
+route::post('store',"BailController@store_recouvreur")->name('gestion.enregistrement');
 });
 
 route::get('/facture/{id}','BailController@facture')->name('client.facture');

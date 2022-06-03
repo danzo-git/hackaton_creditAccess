@@ -59,35 +59,34 @@
           </a>
         </li>
         @endcan
+          @can('add-client')
         <li class="nav-item">
           <a class="nav-link" href="{{route('client.create')}}">
             <i class="mdi mdi-chart-bar menu-icon"></i>
             <span class="menu-title">Ajouter client</span>
           </a>
         </li>
+          @endcan
+
+          @can('manage-folder')
         <li class="nav-item">
           <a class="nav-link" href="{{route("gestion.dossier")}}">
             <i class="mdi mdi-table-large menu-icon"></i>
             <span class="menu-title">Gestion des dossiers</span>
           </a>
         </li>
-        <li class="nav-item">
-          <span class="nav-link" href="#">
-            <span class="menu-title">Docs</span>
-          </span>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.bootstrapdash.com/demo/breeze-free/documentation/documentation.html">
-            <i class="mdi mdi-file-document-box menu-icon"></i>
-            <span class="menu-title">Documentation</span>
-          </a>
-        </li>
+          @endcan
+          <li class="nav-item">
+              <a class="nav-link" href="{{route("gestion.recouvreurs")}}">
+                  <i class="mdi mdi-table-large menu-icon"></i>
+                  <span class="menu-title">Gestion des Recouvreurs</span>
+              </a>
+          </li>
+
         <li class="nav-item sidebar-actions">
           <div class="nav-link">
             <div class="mt-4">
-              <div class="border-none">
-                <p class="text-black">Notification</p>
-              </div>
+
               <ul class="mt-4 pl-0">
                 <li><a href="/deconnexion"> Sign Out</a></li>
               </ul>
@@ -218,10 +217,9 @@
                 <span class="profile-name">{{Auth::user()->name }}</span>
               </a>
               <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+
+                <a class="dropdown-item" href="/deconnexion">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i> Deconnexion </a>
               </div>
             </li>
           </ul>
@@ -236,7 +234,11 @@
             <h3 class="mb-0"> Bienvenue Mr {{Auth::user()->name}}
             </h3>
             <div class="d-flex">
-
+                @if(session()->has('info'))
+                    <div class="notification is-success bg-success">
+                        <span class="text-white d-flex justify-content-center">{{ session('info') }}</span>
+                    </div>
+                @endif
               <button type="button" class="btn btn-sm bg-white btn-icon-text border ml-3">
                 <i class="mdi mdi-printer btn-icon-prepend"></i> Rapport général </button>
             </div>
@@ -330,11 +332,14 @@
                     <div class="col-sm-4">
                       <div class="card mb-3 mb-sm-0">
                         <div class="card-body py-3 px-4">
-                          <p class="m-0 survey-head">Dossiers en cours</p>
+                          <p class="m-0 survey-head">Dossiers a jours </p>
                           <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
                             <div>
-                              <h3 class="m-0 survey-value">20 <span class="h5 text-success">+10%</span></h3>
-                              <p class="m-0">43.000.000 Fcfa</p>
+                                @php
+                                    $dossiers= count(\DB::table("dossiers")->where('status',0)->get());
+                                @endphp
+                              <h3 class="m-0 survey-value">{{$dossiers}} </h3>
+
                             </div>
                             <div id="earningChart" class="flot-chart"></div>
                           </div>
@@ -344,31 +349,21 @@
                     <div class="col-sm-4">
                       <div class="card mb-3 mb-sm-0">
                         <div class="card-body py-3 px-4">
-                          <p class="m-0 survey-head">Dossiers à jours </p>
+                          <p class="m-0 survey-head">Dossiers en retards </p>
                           <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
                             <div>
-                              <h3 class="m-0 survey-value">50 <span class="h5 text-success">+20%</span></h3>
-                              <p class="m-0">90.000.000Fcfa</p>
+                                @php
+                                    $dossiers= count(\DB::table("dossiers")->where('status',1)->get());
+                                @endphp
+                              <h3 class="m-0 survey-value">{{$dossiers}} </h3>
+
                             </div>
                             <div id="productChart" class="flot-chart"></div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-sm-4">
-                      <div class="card">
-                        <div class="card-body py-3 px-4">
-                          <p class="m-0 survey-head">Dossiers en retard</p>
-                          <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
-                            <div>
-                              <h3 class="m-0 survey-value">12 <span class="h5 text-danger">-10%</span></h3>
-                              <p class="m-0">25.000.000 Fcfa</p>
-                            </div>
-                            <div id="orderChart" class="flot-chart"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+
                   </div>
                   <div class="row my-3">
                     <div class="col-sm-12">

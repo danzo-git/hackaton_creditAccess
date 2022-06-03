@@ -46,7 +46,7 @@ class BailController extends Controller
         $r=\DB::table('clients')->where('id',$id)->update(['isclient'=>1]);
 //         \DB::table('comptes')->where('id_client',$id)->insert(["credit"=>0,'id_client'=>$id]);
         //  dd($clients->email);
-   //$this->mailsend($clients->mdp,$clients->email,$doc->montant);
+   $this->mailsend($clients->mdp,$clients->email,$doc->montant);
 \DB::table('comptes')->where('id_client',$id)->update(["credit"=>$doc->montant,'id_client'=>$id]);
 //dd($doc->montant);
         return redirect()->back();
@@ -91,7 +91,7 @@ class BailController extends Controller
 
             $client= \DB::table('clients')->get()->where('email',$request->email)->first();
             //dd($clients);
-           $id=intval(['id'=>$client->id]);
+          //$id=intval(['id'=>$client->id]);
 
         return redirect()->route("client.info", $client->id);
      }
@@ -112,14 +112,7 @@ class BailController extends Controller
 
 
 
-       public function facture($id){
-        $clients= \DB::table('clients')->get()->where('id',$id)->first();
-        // dd($clients->id);
-        $contrat=Contrat::find($id);
-        return view('facture',compact( 'contrat','clients'));
 
-
-    }
 
 
 
@@ -176,7 +169,7 @@ class BailController extends Controller
          'credit'=>0,
         // "id_dossier"=>1,
 
-
+            "reste_payer"=>0,
              'montant_rembourser'=>0,
              'debit'=>0,
 
@@ -188,7 +181,7 @@ class BailController extends Controller
 //            ->get();
 //        dd($id_dossier);
 
-        return redirect()->route('accueil')->with('info','inscription reussie vous recevrez vos informations par mail si la demande est accepté !!!');
+        return redirect()->back()->with('info','inscription reussie vous recevrez vos informations par mail si la demande est accepté !!!');
 
     }
 
@@ -251,7 +244,7 @@ public function agent(){
         \DB::table('dossiers')->insert([
             "montant"=>$request->montant,
             "status"=>0,
-
+            "id_recouvreur"=>0,
             'bulletin'=>$request->bulletin,
             //'but_credit'=>$request->but_credit,
             'date_debut'=>$request->date_debut,
@@ -464,12 +457,51 @@ public function dossier(){
     }
 
     public function remboursement(Request $request){
-       
+        $ancien_mtn=\DB::Table('comptes')->where("id_client",$request->id)->first();
+
         \DB::table('comptes')->where("id_client",$request->id)->update([
 
-            "montant_rembourser"=>$request->montant_rembourser,
+            "montant_rembourser"=>$request->montant_rembourser+$ancien_mtn->montant_rembourser,
         ]);
+//        \DB::table('comptes')->where("id_client",$request->id)->update([
+//
+//            "credit"=>$request->montant_rembourser,
+//        ]);
         return redirect()->back();
     }
+
+    public function store_recouvreur(request $request){
+
+        \DB::table('recouvreurs')->insert([
+
+
+            'nom'=>$request->nom,
+            'prenom'=>$request->prenom,
+
+        ]);
+        return redirect()->back();
+
+    }
+    public function recouvreurs(request $request){
+
+
+        return view('recouvreurs');
+
+    }
+
+    public function choix_recouvreurs(request $request)
+    {
+
+        \DB::table('dossiers')->where("id_client", $request->id)->update([
+
+            id_recouvreur => $request->id,
+        ]);
+    }
+        public function tous_recouvreurs(){
+               $recouvreurs= recouvreurs::all();
+               return view('layouts.historique',compact('recouvreurs'));
+        }
+
+
 }
 

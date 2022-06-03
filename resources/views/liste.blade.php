@@ -45,7 +45,7 @@
         @endcan
         @can('manage-contrat')
         <li class="nav-item">
-          <a class="nav-link"href="{{route('gestion.voir_contrat')}}">
+          <a class="nav-link"href="{{route('gestion.credit')}}">
             <i class="mdi mdi-contacts menu-icon"></i>
             <span class="menu-title">Gestion Credit</span>
           </a>

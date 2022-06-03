@@ -1,5 +1,5 @@
 
-@if(\Auth()->user())
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -484,8 +484,4 @@
 	</script>
   </body>
 </html>
-@else
-<script>
-    window.location.href = "/connexion"
-</script>
-@endif
+
