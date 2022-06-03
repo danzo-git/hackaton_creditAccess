@@ -70,29 +70,13 @@
                         <span class="menu-title">Gestion des dossiers</span>
                     </a>
                 </li>
-                <li class="nav-item">
+    <li class="nav-item">
           <span class="nav-link" href="#">
-            <span class="menu-title">Docs</span>
+          
           </span>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://www.bootstrapdash.com/demo/breeze-free/documentation/documentation.html">
-                        <i class="mdi mdi-file-document-box menu-icon"></i>
-                        <span class="menu-title">Documentation</span>
-                    </a>
-                </li>
-                <li class="nav-item sidebar-actions">
-                    <div class="nav-link">
-                        <div class="mt-4">
-                            <div class="border-none">
-                                <p class="text-black">Notification</p>
-                            </div>
-                            <ul class="mt-4 pl-0">
-                                <li><a href="/deconnexion"> Sign Out</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
+                
+                
             </ul>
         </nav>
         <div class="container-fluid page-body-wrapper">
@@ -201,24 +185,14 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav navbar-nav-right ml-lg-auto">
-                        <li class="nav-item dropdown d-none d-xl-flex border-0">
-                            <a class="nav-link dropdown-toggle" id="languageDropdown" href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-earth"></i> English </a>
-                            <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
-                                <a class="dropdown-item" href="#"> French </a>
-                                <a class="dropdown-item" href="#"> Spain </a>
-                                <a class="dropdown-item" href="#"> Latin </a>
-                                <a class="dropdown-item" href="#"> Japanese </a>
-                            </div>
-                        </li>
+                       
                         <li class="nav-item nav-profile dropdown border-0">
                             <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
                                 <img class="nav-profile-img mr-2" alt="" src="assets/images/faces/face1.jpg" />
                                 <span class="profile-name">{{Auth::user()->name }}</span>
                             </a>
                             <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
+                              
                                 <a class="dropdown-item" href="#">
                                     <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
                             </div>

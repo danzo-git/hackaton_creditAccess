@@ -12,9 +12,13 @@
     <link rel="stylesheet" href="{{asset('style/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" />
     <link rel="stylesheet" href="{{asset('style/assets/css/style.css')}}" />
     <link rel="shortcut icon" href="{{('style/assets/images/favicon.png')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+     
+    {{-- <link rel="stylesheet" href="sweetalert2.min.css"> --}}
     <!-- wizard form -->
     <link rel="stylesheet" href="{{asset('style/assets/vendors/jquery-smartwizard/dist/css/smart_wizard.min.c')}}ss">
-    <link rel="stylesheet" href="{{asset('style/assets/vendors/jquery-nice-select/css/nice-select.c')}}ss">
+    <link rel="stylesheet" href="{{asset('style/assets/vendors/jquery-nice-select/css/nice-select.css')}}">
   </head>
   <body>
     <div class="container-scroller">
@@ -280,23 +284,18 @@
                                         <span>4</span>
                                     </a></li> --}}
                                 </ul>
-                                @if(session()->has('info'))
-                                    <div class="card">
-                                        @include('layouts.notification')
-                                        <script>
-                                            Swal.fire({
-                                                position: 'top-end',
-                                                icon: 'success',
-                                                title: "{{session('info') }}",
-                                                showConfirmButton: false,
-                                                timer: 1500
-                                            })
-                                        </script>
-
-
-                                        <div>
-
+                                
+                                    
+                                     @if(session()->has('info')) 
+                                           <script>
+  swal("HEY", "{{session('info')}}", "success")
+                                </script>
+                                                                      
                                 @endif
+
+                                       
+
+                              
                                 <form action="{{route('client.insertion')}}" id="form"  method="POST">
                                     @csrf
                                     <div class="tab-content">
@@ -513,6 +512,8 @@
 
     <!-- End plugin js for this page -->
     <!-- inject:js -->
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script> --}}
+    {{-- <script src="sweetalert2.all.min.js"></script> --}}
     <script src="{{asset('style/assets/js/off-canvas.js')}}"></script>
     <script src="{{asset('style/assets/js/hoverable-collapse.js')}}"></script>
     <script src="{{asset('style/assets/js/misc.js')}}"></script>

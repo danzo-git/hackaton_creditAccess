@@ -61,7 +61,7 @@ Route::get('/status/{id}','BailController@verifie_status')->name('verifie.status
 Route::get('admin//user/{user}/edit', 'BailController@edit')->name('client.edit');
 route::get('/recouvreurs','BailController@recouvreurs')->name('gestion.recouvreurs');
 route::post('store',"BailController@store_recouvreur")->name('gestion.enregistrement');
-//route::get('/valide_recouv','BailController@valider_recouv')->name('gestion.valider_recouvreur');
+route::get('/valide_recouv/{id}/{rec}','BailController@choix_recouvreurs')->name('gestion.valider_recouvreur');
 });
 
 route::get('/facture/{id}','BailController@facture')->name('client.facture');

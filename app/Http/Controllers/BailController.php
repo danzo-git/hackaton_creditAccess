@@ -489,13 +489,15 @@ public function dossier(){
 
     }
 
-    public function choix_recouvreurs(request $request)
+    public function choix_recouvreurs($id,$rec)
     {
 
-        \DB::table('dossiers')->where("id_client", $request->id)->update([
+        // dd($id);
+        \DB::table('dossiers')->where("id_client", $id)->update([
 
-            id_recouvreur => $request->id,
+            "id_recouvreur" => $rec,
         ]);
+        return back();
     }
 //        public function valider_recouv($id,$recouvreurs){
 //

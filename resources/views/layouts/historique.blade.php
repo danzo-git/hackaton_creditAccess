@@ -65,9 +65,9 @@
 
                                     @endphp
 
-                                    <select name="recouvreurs" >
-                                        @foreach($recouvreurs as $recouvreur)
-                                        <option value="{{$recouvreur->id}}"  >
+                                    <select id="recou" name="recouvreurs" >
+                                        @foreach($recouvreurs as $i=>$recouvreur)
+                                        <option data-pos="{{$i}}" value="{{$recouvreur->id}}"  >
                                             {{$recouvreur->nom}}
                                         </option>
                                         @endforeach
@@ -75,13 +75,21 @@
 
                                 </td>
                                 <td>
-
-{{--                                    <a href="{{route('gestion.valider_recouvreur',"$query->id,$recouvreur->id")}}">choix recouvreurs</a>--}}
+                                    <input type="hidden" id="id" value="{{$query->id}}">
+                                   <a id="lien" href="{{route('gestion.valider_recouvreur',[$query->id,$recouvreur->id])}}">choix recouvreurs</a>
                                 </td>
                             </tr>
                         @endforeach
 
+<script>
+    document.getElementById('recou').addEventListener('change', function() {
 
+        var id = document.getElementById('id').value;
+        document.getElementById('lien').href="/valide_recouv/"+id+"/"+this.value;
+        // alert(this.value);
+});
+
+</script>
 
 
 

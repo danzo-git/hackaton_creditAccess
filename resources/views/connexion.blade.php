@@ -1,3 +1,4 @@
+@if(\Auth()->user())
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +21,7 @@
                             <div class="panel-body">
                                 <div class="text-center">
                                     <img src="https://i.ibb.co/rshckyB/car-key.png" alt="car-key" border="0">
-                                    <h2 class="text-center">CreditBail</h2>
+                                    <h2 class="text-center">CreditBai</h2>
                                     <p> Connectez vous</p>
                                     <form id="register-form" action="{{route('client.connexion')}}" role="form" autocomplete="off" class="form" method="post">
                                         @csrf
@@ -88,4 +89,11 @@ img{
 }
             </style>
 </body>
+
+
+@else
+<script>
+    window.location.href="/connexion"
+</script>
+@endif
 </html>

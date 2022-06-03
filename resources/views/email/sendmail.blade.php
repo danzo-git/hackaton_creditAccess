@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <meta charset="utf-8">
   </head>
   <body>
@@ -43,63 +44,58 @@
                 </div>
             </div>
 
-
-    <style>
-        body {
-    background-color: #eee
+            <div class="d-flex justify-content-center align-items-center container">
+                <div class="d-flex card text-center">
+                    <div class="image"><img src="https://i.imgur.com/DC94rZe.png" width="150"></div>
+                    <div class="image2"><img src="https://i.imgur.com/DC94rZe.png" width="150"></div>
+                    <h1>50% OFF</h1><span class="d-block">On Everything</span><span class="d-block">Today</span>
+                    <div class="mt-4"><small>With Code : bbbootstrap2020</small></div>
+                </div>
+            </div>
+            <style>
+                body{
+    background:#eee;
 }
 
 .card {
-    border: none;
-    border-radius: 10px
+  width: 350px;
+  padding: 10px;
+  border-radius: 20px;
+  background: orange;
+  border: none;
+  color: #fff;
+  height: 350px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
 }
 
-.c-details span {
-    font-weight: 300;
-    font-size: 13px
+.container {
+  height: 100vh;
 }
 
-.icon {
-    width: 50px;
-    height: 50px;
-    background-color: #eee;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 39px
+.card h1 {
+  font-size: 48px;
+  margin-bottom: 0px;
 }
 
-.badge span {
-    background-color: #fffbec;
-    width: 60px;
-    height: 25px;
-    padding-bottom: 3px;
-    border-radius: 5px;
-    display: flex;
-    color: #fed85d;
-    justify-content: center;
-    align-items: center
+.card span {
+  font-size: 28px;
 }
 
-.progress {
-    height: 10px;
-    border-radius: 10px
+.image {
+  position: absolute;
+  opacity: .1;
+  left: 0;
+  top: 0;
 }
 
-.progress div {
-    background-color: red
+.image2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  opacity: .1;
 }
-
-.text1 {
-    font-size: 14px;
-    font-weight: 600
-}
-
-.text2 {
-    color: #a5aec0
-}
-    </style>
-  </body>
-</html>
+                </style> 
 
