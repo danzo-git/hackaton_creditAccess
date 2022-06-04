@@ -1,338 +1,424 @@
-@extends('layouts.notification')
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Accueil</title>
-</head>
-<body>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Gestion De Credit Bail- Index</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="asset/img/favicon.png" rel="icon">
-  <link href="asset/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="asset/vendor/aos/aos.css" rel="stylesheet">
-  <link href="asset/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="asset/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="asset/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="asset/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="asset/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="asset/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="asset/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Arsha - v4.3.0
-  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center">
-
-      <h1 class="logo me-auto"><a href="index.html"></a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          {{-- <li><a class="nav-link scrollto" href="#team">Team</a></li> --}}
-          <li class="dropdown"><a href="#"><span>Connexion</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="{{route('form.connexion')}}">Client</a></li>
-              {{-- <li><a href="{{route('form.fournisseur')}}">Fournisseur</a></li> --}}
-
-            </ul>
-          </li>
-          <li class="dropdown"><a href="#"><span>Souscription</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-
-              <li><a href="#">souscription au credit bail</a></li>
-            </ul>
-          </li>
-          {{-- <li><a class="nav-link scrollto" href="#contact">Contact</a></li> --}}
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
-
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-          <h1>Bienvenue a KKT BAIL</h1>
-          <h2>Le partenaire de confiance engagé auprès de tous pour le développement </h2>
-          <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="{{route('form.connexion')}}" class="btn-get-started scrollto">Demande credit bail</a>
+@extends('layouts.accueil')
+@section('accueil')
+<div id="preloader">
+  <div id="ctn-preloader" class="ctn-preloader">
+      <div class="round_spinner">
+          <div class="spinner"></div>
+          <div class="text">
+              <img src="https://creditaccess.ci/wp-content/uploads/2021/02/Logo_CREDIT-ACCESS.png" alt="">
           </div>
-        </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-          <img src="asset/img/hero-img.png" class="img-fluid animated" alt="">
-        </div>
       </div>
-    </div>
-
-  </section><!-- End Hero -->
-  @section('content')
-<div class="card">
-    @include('layouts.notification')
-    @section('content')
-
-
-  @if(session()->has('info'))
-  <div class="notification is-success bg-success">
-     <span class="text-white d-flex justify-content-center">{{ session('info') }}</span>
+      {{-- <h2 class="head">Did You Know?</h2> --}}
+      <p></p>
   </div>
-@endif
-  <main id="main">
+</div>
 
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
+<header class="header">
+  <div class="header-top py-2 ">
+      <div class="container">
+          <div class="row align-items-center">
+              <div class="col-md-5">
+                  <div class="header-info-left">
 
-        <div class="section-title">
-          <h2>À PROPOS DE NOUS</h2>
-        </div>
-
-        <div class="row content">
-          <div class="col-lg-6">
-            <p>
-                Une banque est une institution financière qui fournit des services bancaires, soit notamment de dépôt, de crédit et paiement.Le terme de banque peut désigner de façon générale le secteur bancaire.. Les banques jouent un rôle essentiel dans la stabilité et le fonctionnement du système financier, et sont en général soumises à une importante surveillance prudentielle de la part de l ...
-            </p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> Des statistiques actualisées à l'usage des acteurs du développement</li>
-              <li><i class="ri-check-double-line"></i> fin à la pauvreté et des financements pour diffuser la prospérité</li>
-              <li><i class="ri-check-double-line"></i>Tous nos travaux d'analyse et de conseil</li>
-            </ul>
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0">
-            <p>
-                Le crédit-bail constitue une forme de financement pour l'acquisition de machines et d'équipements. A financial lease is an alternative to lending as a method of financing the purchase of machinery and equipment. La définition du droit de crédit-bail a été adoptée. The definition of a financial lease right was adopted.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Us Section -->
-
-    <!-- ======= Why Us Section ======= -->
-    <section id="why-us" class="why-us section-bg">
-      <div class="container-fluid" data-aos="fade-up">
-
-        <div class="row">
-
-          <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
-
-            <div class="accordion-list">
-              <ul>
-                <li>
-                  <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"> <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                  <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                    <p>
-                      « Le Client est au coeur de toute notre démarche. Nous le considérons comme un partenaire stratégique avec lequel nous souhaitons établir et entretenir les relations les plus durables »
-                    </p>
+                     
                   </div>
-                </li>
-
-              </ul>
-            </div>
-
+              </div>
+              
           </div>
-
-          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("assets/img/why-us.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
-        </div>
-
       </div>
-    </section><!-- End Why Us Section -->
+  </div>
+  <div class="header-menu header-menu-3 bg-light" id="sticky">
+      <nav class="navbar navbar-expand-lg ">
+          <div class="container">
+              <a class="navbar-brand sticky_logo" href="index.html">
+                  <img class="main" src="https://creditaccess.ci/wp-content/uploads/2021/02/Logo_CREDIT-ACCESS.png" width="80" srcset="img/logo/Logo@2x.png 2x" alt="logo">
+                  <img class="sticky" src="img/logo/Logo-2.png" srcset="img/logo/Logo-2@2x.png 2x" alt="logo">
+              </a>
+              <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                  aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="menu_toggle">
+                      <span class="hamburger">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                      </span>
+                      <span class="hamburger-cross">
+                          <span></span>
+                          <span></span>
+                      </span>
+                  </span>
+              </button>
 
-    <!-- ======= Skills Section ======= -->
- <!-- End Skills Section -->
-
-    <!-- ======= Services Section ======= -->
-    {{-- <section id="services" class="services section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Services</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="row">
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Lorem Ipsum</a></h4>
-              <p></p>
-            </div>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav menu ms-auto">
+                      <li class="nav-item dropdown submenu ">
+                          <a href="#" class="nav-link dropdown-toggle text-dark " role="button" data-bs-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false">Accueil</a>
+                          <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="true"
+                              data-bs-toggle="dropdown"></i>
+                      </li> 
+                      <li class="nav-item dropdown submenu ">
+                          <a href="#nos_services" class="nav-link dropdown-toggle text-dark " role="button" data-bs-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false">Nos services</a>
+                          <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="true"
+                              data-bs-toggle="dropdown"></i>
+                      </li> 
+                      <li class="nav-item dropdown submenu ">
+                          <a href="#" class="nav-link dropdown-toggle text-dark " role="button" data-bs-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false" >Se Connecter</a>
+                          <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="true"
+                              data-bs-toggle="dropdown"></i>
+                      </li> 
+                      
+                  </ul>
+                 
+              </div>
           </div>
+      </nav>
+  </div>
+</header>
 
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Sed ut perspici</a></h4>
-              <p>Les GAB sont généralement affiliés à une banque. Il est possible d'utiliser le GAB d'une banque qui n'est pas la vôtre, mais vous aurez des frais de service à payer. Il y a aussi ce que l'on appelle des « distributeurs de billets ». Les clients de n'importe quelle banque peuvent s'en servir moyennant certains frais.Les GAB sont généralement affiliés à une banque. Il est possible d'utiliser le GAB d'une banque qui n'est pas la vôtre, mais vous aurez des frais de service à payer. Il y a aussi ce que l'on appelle des « distributeurs de billets ». Les clients de n'importe quelle banque peuvent s'en servir moyennant certains frais.Les GAB sont généralement affiliés à une banque. Il est possible d'utiliser le GAB d'une banque qui n'est pas la vôtre, mais vous aurez des frais de service à payer. Il y a aussi ce que l'on appelle des « distributeurs de billets ». Les clients de n'importe quelle banque peuvent s'en servir moyennant certains frais.Les GAB sont généralement affiliés à une banque. Il est possible d'utiliser le GAB d'une banque qui n'est pas la vôtre, mais vous aurez des frais de service à payer. Il y a aussi ce que l'on appelle des « distributeurs de billets ». Les clients de n'importe quelle banque peuvent s'en servir moyennant certains frais.</p>
-            </div>
-          </div>
 
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
+<main>
 
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-layer"></i></div>
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>
-
-        </div>
-
+  <!-- banner section -->
+  <section class="banner-area-4 pt-145" id="banner_animation">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
-    </section><!-- End Services Section --> --}}
-
-    <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
-      <div class="container" data-aos="zoom-in">
-
-        <div class="row">
-          <div class="col-lg-9 text-center text-lg-start">
-            <h3>Nous rejoindre</h3>
-            <p>La lutte contre la pauvreté est au cœur de nos activités. Les mesures que nous concevons, en lien étroit avec les États, aident les plus pauvres à améliorer leurs conditions de vie, via l’accès à des services sociaux, des infrastructures et des emplois.</p>
-          </div>
-          <div class="col-lg-3 cta-btn-container text-center">
-            <a class="cta-btn align-middle" href="#">Souscrivez Maintenant</a>
-          </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://creditaccess.ci/wp-content/uploads/2021/02/1.jpg" class="d-block w-100" alt="...">
         </div>
-
+        <div class="carousel-item">
+          <img src="https://creditaccess.ci/wp-content/uploads/2021/02/Habillage-Page_Slide-Site-Web-optime-scaled.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="https://creditaccess.ci/wp-content/uploads/2021/02/web.jpg" class="d-block w-100" alt="...">
+        </div>
       </div>
-    </section><!-- End Cta Section -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
+  <!-- banner section end-->
 
-    <!-- ======= Team Section ======= -->
- <!-- End Team Section -->
 
-    <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Pricing</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="box">
-              <h3>Free Plan</h3>
-              <h4><sup>$</sup>0<span>per month</span></h4>
-              <ul>
-                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-                <li class="na"><i class="bx bx-x"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li class="na"><i class="bx bx-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-              </ul>
-              <a href="#" class="buy-btn">Get Started</a>
-            </div>
+  <!-- marketplace logo section start-->
+  <section class="mplace-logo bg_white pt-80 pb-85">
+      <div class="container">
+          <div class="row gy-lg-0 gy-4">
+              <div class="col-lg-3  wow fadeInLeft pe-0 mr-60">
+                  <p>Pas besoin de vous déplacer en argence pour faire une Demander.</p>
+              </div>
+              <div class="col-lg-8 border-start text-center pl-lg-60">
+                  <div class="row gy-md-0 gy-4 align-items-center h-100">
+                      <div class="col-md-3 col-6">
+                          <a href="#"><img class="img-fluid wow fadeInRight" data-wow-delay="0.1s"
+                                  src="img/card/company-logo-1.png" alt="logo"></a>
+                      </div>
+                      <div class="col-md-3 col-6">
+                          <a href="#"><img class="img-fluid wow fadeInRight" data-wow-delay="0.3s"
+                                  src="img/card/company-logo-2.png" alt="logo"></a>
+                      </div>
+                      <div class="col-md-3 col-6">
+                          <a href="#"><img class="img-fluid wow fadeInRight" data-wow-delay="0.5s"
+                                  src="img/card/company-logo-3.png" alt="logo"></a>
+                      </div>
+                      <div class="col-md-3 col-6">
+                          <a href="#"><img class="img-fluid wow fadeInRight" data-wow-delay="0.7s"
+                                  src="img/card/company-logo-4.png" alt="logo"></a>
+                      </div>
+                  </div>
+              </div>
           </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
-            <div class="box featured">
-              <h3>Business Plan</h3>
-              <h4><sup>$</sup>29<span>per month</span></h4>
-              <ul>
-                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-                <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
-                <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
-              </ul>
-              <a href="#" class="buy-btn">Get Started</a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
-            <div class="box">
-              <h3>Developer Plan</h3>
-              <h4><sup>$</sup>49<span>per month</span></h4>
-              <ul>
-                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-                <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
-                <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
-              </ul>
-              <a href="#" class="buy-btn">Get Started</a>
-            </div>
-          </div>
-
-        </div>
-
       </div>
-    </section><!-- End Pricing Section -->
+  </section>
+  <!-- marketplace logo section end-->
 
-    <!-- ======= Frequently Asked Questions Section ======= -->
-    <!-- End Frequently Asked Questions Section -->
+  <!-- Nos services-->
+  <section class="bcard-feature-area bg_disable pt-lg-125 pt-105 pb-lg-140 pb-115" style="background-image: url('https://creditaccess.ci/wp-content/uploads/2021/02/Habillage-Page_Slide-Site-Web-scaled.jpg')">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-6 mx-auto">
+                  <div class="section-title">
+                      <h2 class="wow fadeInUp" id="nos_services">Nos services</h2>
+                      <p class="wow fadeInUp" data-wow-delay="0.3s">Par ce que vous êtes important à nos yeux, nous travaillons d'arrache pied chaque jours pour vous offrir des services de qualité
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <div class="row mt-30 gy-4">
+              <div class="col-xl-4 col-md-6">
+                  <div class="feature-card-widget-5 wow fadeInUp" data-wow-delay="0.1s">
+                      <img src="img/feature/icon-11.svg" alt="icon">
+                      <h4 class="mt-30 mb-15"> Suivie en ligne</h4>
+                      <p>Online banking, also known as internet banking or web banking, is an electronic payment
+                          system.</p>
+                  </div>
+              </div>
+              <div class="col-xl-4 col-md-6">
+                  <div class="feature-card-widget-5 wow fadeInUp" data-wow-delay="0.3s">
+                      <img src="img/feature/icon-12.svg" alt="icon">
+                      <h4 class="mt-30 mb-15">Accord rapide de crédit</h4>
+                      <p>Online banking, also known as internet banking or web banking, is an electronic payment
+                          system.</p>
+                  </div>
+              </div>
+              <div class="col-xl-4 col-md-6">
+                  <div class="feature-card-widget-5 wow fadeInUp" data-wow-delay="0.5s">
+                      <img src="img/feature/icon-13.svg" alt="icon">
+                      <h4 class="mt-30 mb-15">Protection de vos données personnelles</h4>
+                      <p>Online banking, also known as internet banking or web banking, is an electronic payment
+                          system.</p>
+                  </div>
+              </div>
+              <div class="col-xl-4 col-md-6">
+                  <div class="feature-card-widget-5 wow fadeInUp" data-wow-delay="0.7s">
+                      <img src="img/feature/icon-14.svg" alt="icon">
+                      <h4 class="mt-30 mb-15">Un suivie par mobile</h4>
+                      <p>Online banking, also known as internet banking or web banking, is an electronic payment
+                          system.</p>
+                  </div>
+              </div>
+              <div class="col-xl-4 col-md-6">
+                  <div class="feature-card-widget-5 wow fadeInUp" data-wow-delay="0.9s">
+                      <img src="img/feature/icon-15.svg" alt="icon">
+                      <h4 class="mt-30 mb-15">Suivie personnel pendant remboursement</h4>
+                      <p>Online banking, also known as internet banking or web banking, is an electronic payment
+                          system.</p>
+                  </div>
+              </div>
+              <div class="col-xl-4 col-md-6">
+                  <div class="feature-card-widget-5 wow fadeInUp" data-wow-delay="1.1s">
+                      <img src="img/feature/icon-16.svg" alt="icon">
+                      <h4 class="mt-30 mb-15">Systeme de remboursement flexible</h4>
+                      <p>Online banking, also known as internet banking or web banking, is an electronic payment
+                          system.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!--Nos services end-->
 
-  <!-- ======= Contact Section ======= -->
- <!-- End Contact Section -->
+  <!-- Safe Deposit section start-->
+  <section class="safe-deposit-area overflow-hidden pt-lg-155 pb-lg-140 pt-125 pb-115 bg_white">
+      <div class="container">
+          <div class="row align-items-center gy-lg-0 gy-4">
+              <div class="col-lg-6 col-md-9 mx-auto">
+                  <div class="card-img">
+                      <div class="logo">
+                          <img src="img/card/visa.png" alt="logo">
+                          <img src="img/card/mastercard.png" alt="logo">
+                      </div>
+                      <img class="bg-img" src="img/card/payment-bg.png" alt="bg img">
+                      <img class="img-fluid wow fadeInUp" src="img/card/credit-card.png" alt="credit-card">
+                  </div>
+              </div>
+              <div class="col-lg-6">
+                  <div class="section-title text-start">
+                      <h2 class="wow fadeInUp">Gerer votre compte depuis un espace client dédié</h2>
+                      <p class="border-left pl-10 wow fadeInUp" data-wow-delay="0.2s">Banca came as a solution to
+                          the next generation. Through our
+                          portal,
+                          you can sit at the
+                          comfort of your home, office or pretty much anywhere, and send money to anywhere!
+                          Through our strong network.</p>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="payment-system mt-80 wow fadeInRight" data-wow-delay="0.1s">
+                              <img src="img/card/online-payment.svg" alt="icon">
+                              <h5 class="mt-20 mb-10">Mode de paiement simple</h5>
+                              <p>We acceept many type payments getway that you love.</p>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="payment-system mt-65 wow fadeInRight" data-wow-delay="0.3s">
+                              <img src="img/card/safebox.svg" alt="icon">
+                              <h5 class="mt-20 mb-10">Safe Deposit</h5>
+                              <p>You can trust us for your deposit. No hidden fee.</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- Safe Deposit section end-->
 
-  </main><!-- End #main -->
+  <!-- Customize Card section start-->
+  <section class="customize-card-area pt-lg-125 pb-lg-140 pt-105 pb-115 bg_disable" id="card_area_animation">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-6 pe-lg-0">
+                  <div class="section-title mb-35 text-start">
+                      <h2 class="wow fadeInUp">Suivez en direct votre recouvrement</h2>
+                      <p class="wow fadeInUp" data-wow-delay="0.3s">Personalize the newly-improved Payment Options
+                          Form to include all your payment methods
+                          such as, easy monthly payments, credit cards</p>
+                  </div>
+              </div>
+          </div>
+          <div class="row align-items-center">
+              <div class="col-lg-6 order-lg-1 order-2">
 
-  <!-- ======= Footer ======= -->
- <!-- End Footer -->
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+                  <div class="feature-card-widget-6 wow fadeInUp mt-sm-0 mt-5" data-wow-delay="0.1s">
+                      <div class="icon mr-20">
+                          <img src="img/card/money-transfer.png" alt="icon">
+                      </div>
+                      <div class="card-content">
+                          <h6>Suivez toutes vos transactions sur vos apareils</h6>
+                          <p>The daily, weekly, monthly and yearly limits for amount of transactions and total
+                              number of transactions.</p>
+                      </div>
+                  </div>
+                  <div class="feature-card-widget-6 wow fadeInUp mt-30" data-wow-delay="0.3s">
+                      <div class="icon mr-20">
+                          <img src="img/card/reminder.png" alt="icon">
+                      </div>
+                      <div class="card-content">
+                          <h6>Soyez constemment informé de nos activités</h6>
+                          <p>The daily, weekly, monthly and yearly limits for amount of transactions and total
+                              number of transactions.</p>
+                      </div>
+                  </div>
+                  <div class="feature-card-widget-6 wow fadeInUp mt-30" data-wow-delay="0.5s">
+                      <div class="icon mr-20">
+                          <img src="img/card/refresh.png" alt="icon">
+                      </div>
+                      <div class="card-content">
+                          <h6>Soyez informé de nos mises à jours</h6>
+                          <p>The daily, weekly, monthly and yearly limits for amount of transactions and total
+                              number of transactions.</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-6 order-lg-2 order-1 pl-lg-50">
+                  <div class="card-img mb-5 mb-sm-0">
 
-  <!-- Vendor JS Files -->
-  <script src="asset/vendor/aos/aos.js"></script>
-  <script src="asset/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="asset/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="asset/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="asset/vendor/php-email-form/validate.js"></script>
-  <script src="asset/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="asset/vendor/waypoints/noframework.waypoints.js"></script>
+                      <img class="img-fluid" src="img/card/card-img-bg.png" alt="bg image">
+                      <div class="shape-1">
 
-  <!-- Template Main JS File -->
-  <script src="asset/js/main.js"></script>
+                          <img class="layer wow rotateInUpRight" data-wow-delay="1.2s" data-depth="0.2"
+                              src="img/card/Card-image-1.png" alt="card">
+                      </div>
+                      <div class="shape-2">
 
-</body>
+                          <img class="layer wow rotateInUpRight" data-wow-delay="0.6s" data-depth="0.15"
+                              src="https://creditaccess.ci/wp-content/uploads/2021/02/Com-Cre%CC%81dit-de-campagne_Site.jpg" alt="card">
+                      </div>
+                      <div class="shape-3">
 
-</html>
-</body>
-</html>
+                          <img class="layer wow rotateInUpRight" data-depth="0.3" src="img/card/Card-image-3.png"
+                              alt="card">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- Customize Card section end-->
+
+  <!-- Why Choose Use start -->
+  <section class="why-choose-area pt-125 pb-135 overflow-hidden">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-6 mx-auto">
+                  <div class="section-title">
+                      <h2 class="wow fadeInUp">Pourquoi nous choisir ?</h2>
+                      <p class="wow fadeInUp" data-wow-delay="0.3s">There are many variations of passages of Lorem
+                          Ipsum available, but the majority have
+                          suffered alteration.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="row mt-55 gy-lg-0 gy-4">
+              <div class="col-lg-4">
+                  <div class="content-box pr-lg-30 pl-lg-30 wow fadeInUp" data-wow-delay="0.1s">
+
+                      <img src="img/card/layout.svg" alt="icon">
+                      <h4 class="mt-30 mb-15">Facile d'acces</h4>
+                      <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                          suffered alteration.</p>
+                  </div>
+              </div>
+              <div class="col-lg-4">
+                  <div class="content-box pr-lg-30 pl-lg-30 wow fadeInUp" data-wow-delay="0.3s">
+                      <div class="line-shape">
+                          <img class="wow zoomIn" data-wow-delay="0.1s" src="img/card/line-shape.png" alt="shape">
+                      </div>
+                      <img src="img/card/salary.svg" alt="icon">
+                      <h4 class="mt-30 mb-15">Accord facile de crédit</h4>
+                      <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                          suffered alteration.</p>
+                  </div>
+              </div>
+              <div class="col-lg-4">
+                  <div class="content-box pr-lg-30 pl-lg-30 wow fadeInUp" data-wow-delay="0.5s">
+                      <img src="img/card/antivirus.svg" alt="icon">
+                      <h4 class="mt-30 mb-15">100% Securisé</h4>
+                      <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                          suffered alteration.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- Why Choose Use end -->
+
+
+
+  <!-- Call To Action start -->
+  <section class="cta-3 pt-90 pb-75">
+      <div class="img-shapes">
+          <div class="shape" data-parallax='{"x": 0, "y": 0, "rotateZ":20}'>
+              <img src="img/card/right-arrow.png" alt="img">
+          </div>
+
+          <div class="shape" data-parallax='{"x": 200, "y": 90, "rotateZ":0}'>
+              <div class="fly-msg">
+                  <img src="img/card/mail.png" alt="">
+                  <img src="img/card/wings-1.png" alt="">
+                  <img src="img/card/wings-2.png" alt="">
+              </div>
+          </div>
+          <div class="shape" data-parallax='{"x": 0, "y": 0, "rotateZ":-6}'>
+              <img class="wow fadeInRight" src="img/card/postbox.png" alt="img">
+          </div>
+          <div class="shape" data-parallax='{"x": -200, "y": 0, "rotateZ":0}'>
+              <img src="img/card/cloud.png" alt="img">
+          </div>
+      </div>
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-5">
+                  <div class="cta-content text-black wow fadeInLeft">
+                      <h5>Soyez informé de nos activités</h5>
+                      <h2>S'inscrire à notre newsletter</h2>
+
+                      <div class="input-group mt-40">
+                          <input type="email" class="form-control" placeholder="Entrez votre email">
+                          <a href="#" class="input-append theme-btn theme-btn-lg">S'inscrire</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- Call To Action end -->
+</main>
+
+@endsection

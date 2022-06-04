@@ -23,10 +23,10 @@
   <div class="text text3">d</div>
   <div class="text text4">i</div>
   <div class="text text5">t</div>
-  <div class="text text6">b</div>
-  <div class="text text7">a</div>
-  <div class="text text8">il</div>
-  <div class="text text9">il</div>
+  <div class="text text6">a</div>
+  <div class="text text7">c</div>
+  <div class="text text8">e</div>
+  <div class="text text9">ss</div>
   <div class="frame frame0"></div>
   <div class="frame frame1"></div>
   <div class="frame frame2"></div>
@@ -35,6 +35,7 @@
   <div class="frame frame5"></div>
   <div class="frame frame6"></div>
   <div class="frame frame7"></div>
+  <div class="frame frame8"></div>
   <div class="particle particle00"></div>
   <div class="particle particle01"></div>
   <div class="particle particle02"></div>
@@ -220,6 +221,11 @@ body {
   left: 100%;
   height: 100vh;
   background-color: #eb4747;
+}
+.background8 {
+  left: 100%;
+  height: 100vh;
+  background-color: #ff0808;
 }
 /*
 * text
