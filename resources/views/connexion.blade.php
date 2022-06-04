@@ -20,9 +20,9 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="text-center">
-                                    <img src="https://i.ibb.co/rshckyB/car-key.png" alt="car-key" border="0">
-                                    <h2 class="text-center">CreditBai</h2>
-                                    <p> Connectez vous</p>
+                                    <img src="https://creditaccess.ci/wp-content/uploads/2021/02/Logo_CREDIT-ACCESS.png" alt="car-key" border="0">
+                                    {{-- <h2 class="text-center">creditAcess</h2> --}}
+                                    <p> Client Acess</p>
                                     <form id="register-form" action="{{route('client.connexion')}}" role="form" autocomplete="off" class="form" method="post">
                                         @csrf
                                         <div class="form-group">

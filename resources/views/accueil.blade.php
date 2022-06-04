@@ -32,7 +32,7 @@
           <div class="container">
               <a class="navbar-brand sticky_logo" href="index.html">
                   <img class="main" src="https://creditaccess.ci/wp-content/uploads/2021/02/Logo_CREDIT-ACCESS.png" width="80" srcset="img/logo/Logo@2x.png 2x" alt="logo">
-                  <img class="sticky" src="img/logo/Logo-2.png" srcset="img/logo/Logo-2@2x.png 2x" alt="logo">
+                  <img class="sticky" src="https://creditaccess.ci/wp-content/uploads/2021/02/Logo_CREDIT-ACCESS.png" srcset="img/logo/Logo-2@2x.png 2x" alt="logo">
               </a>
               <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
