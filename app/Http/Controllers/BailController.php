@@ -87,12 +87,12 @@ class BailController extends Controller
         //&& Client::where('mdp',$request->mdp)->exists()
 
      if(Client::where('email', $request->email)->exists()  &&
-        Client::where('mdp',$request->mdp)->exists()){
+        Client::where('mdp',$request->mdp)->exists() &&  Client::where('isclient',1)){
 
             $client= \DB::table('clients')->get()->where('email',$request->email)->first();
             //dd($clients);
           //$id=intval(['id'=>$client->id]);
-
+                
         return redirect()->route("client.info", $client->id);
      }
      else{
@@ -259,7 +259,7 @@ public function agent(){
             // 'lieu'=>$request->lieu,
 
         ]);
-        return redirect()->back()->with('info','inscription reussie vous recevrez vos informations par mail si la demande est accepté !!!');
+        return redirect()->back()->with('info','soumission  reussie vous recevrez vos informations par mail si la demande est accepté !!!');
     }
 
 
@@ -467,7 +467,7 @@ public function dossier(){
 //
 //            "credit"=>$request->montant_rembourser,
 //        ]);
-        return redirect()->back();
+        return redirect()->back()->with('info',"un remboursement effectué");
     }
 
     public function store_recouvreur(request $request){
@@ -499,13 +499,13 @@ public function dossier(){
         ]);
         return back();
     }
-//        public function valider_recouv($id,$recouvreurs){
-//
-//              \DB::table('dossiers')->where("id_client",$id)->update([
-//                 "id_recouvreur"=>$recouvreurs,
-//              ]);
-//               return back();
-//        }
+     
+    
+    public function demandeCredit(){
+            return view('credit');
+            
+    }
+
 
 
 }

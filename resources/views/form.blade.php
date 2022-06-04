@@ -24,7 +24,7 @@
     <div class="container-scroller">
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
-              <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a>
+              <a class="sidebar-brand brand-logo" href="index.html"><img src="https://creditaccess.ci/wp-content/uploads/2021/02/Logo_CREDIT-ACCESS.png" alt="logo" /></a>
               <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
             </div>
             <ul class="nav">
@@ -42,7 +42,7 @@
                     {{Auth::user()->name}}
                     <h6> agent connecté: {{$userRole->name}}</h6>
 
-                    <span class="font-weight-normal">$8,753.00</span>
+                    
                   </div>
                   <span class="badge badge-danger text-white ml-3 rounded">3</span>
                 </a>
@@ -58,9 +58,9 @@
                 <a class="nav-link" href="{{route('liste.dash')}}" aria-expanded="false" aria-controls="ui-basic">
                   <i class="mdi mdi-crosshairs-gps menu-icon"></i>
                   <span class="menu-title">Gestion Client</span>
-
+      
                 </a>
-
+      
               </li>
               @endcan
               @can('manage-contrat')
@@ -79,37 +79,37 @@
                 </a>
               </li>
               @endcan
+                @can('add-client')
               <li class="nav-item">
                 <a class="nav-link" href="{{route('client.create')}}">
                   <i class="mdi mdi-chart-bar menu-icon"></i>
                   <span class="menu-title">Ajouter client</span>
                 </a>
               </li>
+                @endcan
+      
+                @can('manage-folder')
               <li class="nav-item">
-                <a class="nav-link" href="pages/tables/basic-table.html">
+                <a class="nav-link" href="{{route("gestion.dossier")}}">
                   <i class="mdi mdi-table-large menu-icon"></i>
-                  <span class="menu-title">Tables</span>
+                  <span class="menu-title">Gestion des dossiers</span>
                 </a>
               </li>
-              <li class="nav-item">
-                <span class="nav-link" href="#">
-                  <span class="menu-title">Docs</span>
-                </span>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="https://www.bootstrapdash.com/demo/breeze-free/documentation/documentation.html">
-                  <i class="mdi mdi-file-document-box menu-icon"></i>
-                  <span class="menu-title">Documentation</span>
-                </a>
-              </li>
+                @endcan
+                @can('manage-recouvreur')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route("gestion.recouvreurs")}}">
+                        <i class="mdi mdi-table-large menu-icon"></i>
+                        <span class="menu-title">Gestion des Recouvreurs</span>
+                    </a>
+                </li>
+      @endcan
               <li class="nav-item sidebar-actions">
                 <div class="nav-link">
                   <div class="mt-4">
-                    <div class="border-none">
-                      <p class="text-black">Notification</p>
-                    </div>
+                  
                     <ul class="mt-4 pl-0">
-                      <li><a href="/deconnexion"> Sign Out</a></li>
+                      <li><a href="/deconnexion"> Deconnexion</a></li>
                     </ul>
                   </div>
                 </div>
@@ -222,20 +222,11 @@
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-right ml-lg-auto">
-              <li class="nav-item dropdown d-none d-xl-flex border-0">
-                <a class="nav-link dropdown-toggle" id="languageDropdown" href="#" data-toggle="dropdown">
-                  <i class="mdi mdi-earth"></i> English </a>
-                <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
-                  <a class="dropdown-item" href="#"> French </a>
-                  <a class="dropdown-item" href="#"> Spain </a>
-                  <a class="dropdown-item" href="#"> Latin </a>
-                  <a class="dropdown-item" href="#"> Japanese </a>
-                </div>
-              </li>
+              
               <li class="nav-item nav-profile dropdown border-0">
                 <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
                   <img class="nav-profile-img mr-2" alt="" src="../assets/images/faces/face1.jpg" />
-                  <span class="profile-name">Henry Klein</span>
+                  <span class="profile-name">{{Auth::user()->name}}</span>
                 </a>
                 <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
                   <a class="dropdown-item" href="#">
@@ -288,14 +279,19 @@
                                     
                                      @if(session()->has('info')) 
                                            <script>
-  swal("HEY", "{{session('info')}}", "success")
+  swal("inscription zvec succes", "{{session('info')}}", "success")
                                 </script>
                                                                       
                                 @endif
 
                                        
 
-                              
+                                @if(session()->has('info')) 
+                                <script>
+swal("inscription avec succes", "{{session('info')}}", "success")
+                     </script>
+                                                           
+                     @endif
                                 <form action="{{route('client.insertion')}}" id="form"  method="POST">
                                     @csrf
                                     <div class="tab-content">

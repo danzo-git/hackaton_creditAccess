@@ -59,37 +59,37 @@
           </a>
         </li>
         @endcan
+          @can('add-client')
         <li class="nav-item">
           <a class="nav-link" href="{{route('client.create')}}">
             <i class="mdi mdi-chart-bar menu-icon"></i>
             <span class="menu-title">Ajouter client</span>
           </a>
         </li>
+          @endcan
+
+          @can('manage-folder')
         <li class="nav-item">
-          <a class="nav-link" href="pages/tables/basic-table.html">
+          <a class="nav-link" href="{{route("gestion.dossier")}}">
             <i class="mdi mdi-table-large menu-icon"></i>
-            <span class="menu-title">Tables</span>
+            <span class="menu-title">Gestion des dossiers</span>
           </a>
         </li>
-        <li class="nav-item">
-          <span class="nav-link" href="#">
-            <span class="menu-title">Docs</span>
-          </span>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.bootstrapdash.com/demo/breeze-free/documentation/documentation.html">
-            <i class="mdi mdi-file-document-box menu-icon"></i>
-            <span class="menu-title">Documentation</span>
-          </a>
-        </li>
+          @endcan
+          @can('manage-recouvreur')
+          <li class="nav-item">
+              <a class="nav-link" href="{{route("gestion.recouvreurs")}}">
+                  <i class="mdi mdi-table-large menu-icon"></i>
+                  <span class="menu-title">Gestion des Recouvreurs</span>
+              </a>
+          </li>
+@endcan
         <li class="nav-item sidebar-actions">
           <div class="nav-link">
             <div class="mt-4">
-              <div class="border-none">
-                <p class="text-black">Notification</p>
-              </div>
+            
               <ul class="mt-4 pl-0">
-                <li><a href="/deconnexion"> Sign Out</a></li>
+                <li><a href="/deconnexion"> deconnexion</a></li>
               </ul>
             </div>
           </div>
@@ -245,7 +245,7 @@
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Demande de credit  refuser /accepter</h4>
+                  <h4 class="card-title"> Roles et droits</h4>
                   <p class="card-description">
                       <a href="/deconnexion" class="btn btn-outline-success">deconnexion</a> </p>
                   <div class="container">

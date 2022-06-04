@@ -13241,10 +13241,7 @@ dl {
   padding: 0;
   width: 260px;
   z-index: 11;
-  transition: width 0.25s ease, background 0.25s ease;
-  -webkit-transition: width 0.25s ease, background 0.25s ease;
-  -moz-transition: width 0.25s ease, background 0.25s ease;
-  -ms-transition: width 0.25s ease, background 0.25s ease; }
+  }
   .sidebar .nav {
     overflow: hidden;
     -ms-flex-wrap: nowrap;
@@ -13257,9 +13254,7 @@ dl {
     .sidebar .nav .nav-item {
       padding: 0 2.25rem;
       -webkit-transition-duration: 0.25s;
-      transition-duration: 0.25s;
-      transition-property: background;
-      -webkit-transition-property: background; }
+      }
       .sidebar .nav .nav-item .collapse {
         z-index: 999; }
       .sidebar .nav .nav-item .nav-link {

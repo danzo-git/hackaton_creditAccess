@@ -1,28 +1,8 @@
-
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Breeze Admin</title>
-    <link rel="stylesheet" href="{{asset('style/assets/vendors/mdi/css/materialdesignicons.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('style/assets/vendors/flag-icon-css/css/flag-icon.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('style/assets/vendors/css/vendor.bundle.base.css')}}" />
-    <link rel="stylesheet" href="{{asset('style/assets/vendors/font-awesome/css/font-awesome.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('style/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('style/assets/css/style.css')}}" />
-    <link rel="shortcut icon" href="{{('style/assets/images/favicon.png')}}" />
-    <!-- wizard form -->
-    <link rel="stylesheet" href="{{asset('style/assets/vendors/jquery-smartwizard/dist/css/smart_wizard.min.c')}}ss">
-    <link rel="stylesheet" href="{{asset('style/assets/vendors/jquery-nice-select/css/nice-select.c')}}ss">
-  </head>
-  <body>
+<body>
     <div class="container-scroller">
-      <nav class="sidebar " id="sidebar">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
-          <a class="sidebar-brand brand-logo" href="index.html"><img src="https://creditaccess.ci/wp-content/uploads/2021/02/Logo_CREDIT-ACCESS.png" alt="logo" /></a>
+          <a class="sidebar-brand brand-logo" href="index.html"><img src="../assets/images/logo.svg" alt="logo" /></a>
           <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href="index.html"><img src="../assets/images/logo-mini.svg" alt="logo" /></a>
         </div>
         <ul class="nav">
@@ -37,11 +17,11 @@
                 <span class="font-weight-medium mb-2"> {{$clients->nom}}</span>
                 <span class="font-weight-normal">$8,753.00</span>
               </div>
-              
+              <span class="badge badge-danger text-white ml-3 rounded">3</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="index.html">
               <i class="mdi mdi-home menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -49,24 +29,66 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-              <span class="menu-title">Mon profile</span>
-            
+              <span class="menu-title">Basic UI Elements</span>
+              <i class="menu-arrow"></i>
             </a>
-            
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
+                </li>
+              </ul>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="pages/icons/mdi.html">
               <i class="mdi mdi-contacts menu-icon"></i>
-              <span class="menu-title">Contactez mon recouvreur</span>
+              <span class="menu-title">Icons</span>
             </a>
           </li>
-          
+          <li class="nav-item">
+            <a class="nav-link" href="pages/forms/basic_elements.html">
+              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+              <span class="menu-title">Forms</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/charts/chartjs.html">
+              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <span class="menu-title">Charts</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/tables/basic-table.html">
+              <i class="mdi mdi-table-large menu-icon"></i>
+              <span class="menu-title">Tables</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <span class="nav-link" href="#">
+              <span class="menu-title">Docs</span>
+            </span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.bootstrapdash.com/demo/breeze-free/documentation/documentation.html">
+              <i class="mdi mdi-file-document-box menu-icon"></i>
+              <span class="menu-title">Documentation</span>
+            </a>
+          </li>
           <li class="nav-item sidebar-actions">
             <div class="nav-link">
               <div class="mt-4">
-                
+                <div class="border-none">
+                  <p class="text-black">Notification</p>
+                </div>
                 <ul class="mt-4 pl-0">
-                 <a href="/deconnexion"><li>Deconnexion</li></a>
+                 <a href="/deconnexion"><li>Sign Out</li></a>
                 </ul>
               </div>
             </div>
@@ -96,16 +118,103 @@
               <i class="mdi mdi-menu"></i>
             </button>
             <ul class="navbar-nav">
-             
-              
-              
+              <li class="nav-item dropdown">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                  <i class="mdi mdi-bell-outline"></i>
+                  <span class="count count-varient1">7</span>
+                </a>
+                <div class="dropdown-menu navbar-dropdown navbar-dropdown-large preview-list" aria-labelledby="notificationDropdown">
+                  <h6 class="p-3 mb-0">Notifications</h6>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <img src="../assets/images/faces/face4.jpg" alt="" class="profile-pic" />
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="mb-0"> Dany Miles <span class="text-small text-muted">commented on your photo</span>
+                      </p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <img src="../assets/images/faces/face3.jpg" alt="" class="profile-pic" />
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="mb-0"> James <span class="text-small text-muted">posted a photo on your wall</span>
+                      </p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <img src="../assets/images/faces/face2.jpg" alt="" class="profile-pic" />
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="mb-0"> Alex <span class="text-small text-muted">just mentioned you in his post</span>
+                      </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <p class="p-3 mb-0">View all activities</p>
+                </div>
+              </li>
+              <li class="nav-item dropdown d-none d-sm-flex">
+                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown">
+                  <i class="mdi mdi-email-outline"></i>
+                  <span class="count count-varient2">5</span>
+                </a>
+                <div class="dropdown-menu navbar-dropdown navbar-dropdown-large preview-list" aria-labelledby="messageDropdown">
+                  <h6 class="p-3 mb-0">Messages</h6>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-item-content flex-grow">
+                      <span class="badge badge-pill badge-success">Request</span>
+                      <p class="text-small text-muted ellipsis mb-0"> Suport needed for user123 </p>
+                    </div>
+                    <p class="text-small text-muted align-self-start"> 4:10 PM </p>
+                  </a>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-item-content flex-grow">
+                      <span class="badge badge-pill badge-warning">Invoices</span>
+                      <p class="text-small text-muted ellipsis mb-0"> Invoice for order is mailed </p>
+                    </div>
+                    <p class="text-small text-muted align-self-start"> 4:10 PM </p>
+                  </a>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-item-content flex-grow">
+                      <span class="badge badge-pill badge-danger">Projects</span>
+                      <p class="text-small text-muted ellipsis mb-0"> New project will start tomorrow </p>
+                    </div>
+                    <p class="text-small text-muted align-self-start"> 4:10 PM </p>
+                  </a>
+                  <h6 class="p-3 mb-0">See all activity</h6>
+                </div>
+              </li>
+              <li class="nav-item nav-search border-0 ml-1 ml-md-3 ml-lg-5 d-none d-md-flex">
+                <form class="nav-link form-inline mt-2 mt-md-0">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" />
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="mdi mdi-magnify"></i>
+                      </span>
+                    </div>
+                  </div>
+                </form>
+              </li>
             </ul>
             <ul class="navbar-nav navbar-nav-right ml-lg-auto">
-              
+              <li class="nav-item dropdown d-none d-xl-flex border-0">
+                <a class="nav-link dropdown-toggle" id="languageDropdown" href="#" data-toggle="dropdown">
+                  <i class="mdi mdi-earth"></i> English </a>
+                <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
+                  <a class="dropdown-item" href="#"> French </a>
+                  <a class="dropdown-item" href="#"> Spain </a>
+                  <a class="dropdown-item" href="#"> Latin </a>
+                  <a class="dropdown-item" href="#"> Japanese </a>
+                </div>
+              </li>
               <li class="nav-item nav-profile dropdown border-0">
                 <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
                   <img class="nav-profile-img mr-2" alt="" src="../assets/images/faces/face1.jpg" />
-                  <span class="profile-name">{{$clients->nom}}</span>
+                  <span class="profile-name">Henry Klein</span>
                 </a>
                 <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
                   <a class="dropdown-item" href="#">
@@ -154,12 +263,6 @@
                                         <span>4</span>
                                     </a></li> --}}
                                 </ul>
-                                @if(session()->has('info')) 
-                                <script>
-swal("demande reussie", "{{session('info')}}", "success")
-                     </script>
-                                                           
-                     @endif
                               <form action="{{route('client.dossier')}}" method="post">
                                   @csrf
                                 <div class="tab-content">
@@ -326,39 +429,4 @@ swal("demande reussie", "{{session('info')}}", "success")
       </div>
       <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="{{asset('style/assets/vendors/js/vendor.bundle.base.js')}}"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="{{asset('style/assets/vendors/flot/jquery.flot.js')}}"></script>
-    <script src="{{asset('style/assets/vendors/flot/jquery.flot.resize.js')}}"></script>
-    <script src="{{asset('style/assets/vendors/flot/jquery.flot.categories.js')}}"></script>
-    <script src="{{asset('style/assets/vendors/flot/jquery.flot.fillbetween.js')}}"></script>
-    <script src="{{asset('style/assets/vendors/flot/jquery.flot.stack.js')}}"></script>
-    <script src="{{asset('style/assets/vendors/flot/jquery.flot.pie.js')}}"></script>
-    <script src="{{asset('style/assets/vendors/chart.js/Chart.min.js')}}"></script>
-    <script src="{{asset('style/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
-
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="{{asset('style/assets/js/off-canvas.js')}}"></script>
-    <script src="{{asset('style/assets/js/hoverable-collapse.js')}}"></script>
-    <script src="{{asset('style/assets/js/misc.js')}}"></script>
-    <script src="{{asset('style/assets/js/chart.js')}}"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script src="{{asset('style/assets/js/dashboard.js')}}"></script>
-    <!-- End custom js for this page -->
-    <!-- wizard form -->
-    <script src="{{asset('style/assets/vendors/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script>
-    <script src="{{asset('style/assets/vendors/jquery-smartwizard/dist/js/jquery.smartWizard.js')}}"></script>
-    <script>
-		$(document).ready(function(){
-			// SmartWizard initialize
-			$('#smartwizard').smartWizard();
-		});
-	</script>
   </body>
-</html>
-

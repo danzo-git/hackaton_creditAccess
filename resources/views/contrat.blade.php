@@ -1,10 +1,12 @@
 @extends('layouts.headdash')
 
 @section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <div class="container-scroller">
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
-                <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a>
+                <a class="sidebar-brand brand-logo" href="index.html"><img src="https://creditaccess.ci/wp-content/uploads/2021/02/Logo_CREDIT-ACCESS.png" alt="logo" /></a>
                 <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
             </div>
             <ul class="nav">
@@ -34,62 +36,62 @@
                     </a>
                 </li>
                 @can('manage-client')
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('liste.dash')}}" aria-expanded="false" aria-controls="ui-basic">
-                            <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-                            <span class="menu-title">Gestion Client</span>
-
-                        </a>
-
-                    </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('liste.dash')}}" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                    <span class="menu-title">Gestion Client</span>
+        
+                  </a>
+        
+                </li>
                 @endcan
                 @can('manage-contrat')
-                    <li class="nav-item">
-                        <a class="nav-link"href="{{route('gestion.credit')}}">
-                            <i class="mdi mdi-contacts menu-icon"></i>
-                            <span class="menu-title">Gestion Credit</span>
-                        </a>
-                    </li>
+                <li class="nav-item">
+                  <a class="nav-link"href="{{route('gestion.credit')}}">
+                    <i class="mdi mdi-contacts menu-icon"></i>
+                    <span class="menu-title">Gestion Credit</span>
+                  </a>
+                </li>
                 @endcan
                 @can('manage-agent')
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('gestion.agent')}}">
-                            <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-                            <span class="menu-title">Gestion Agent</span>
-                        </a>
-                    </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('gestion.agent')}}">
+                    <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                    <span class="menu-title">Gestion Agent</span>
+                  </a>
+                </li>
                 @endcan
+                  @can('add-client')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('client.create')}}">
-                        <i class="mdi mdi-chart-bar menu-icon"></i>
-                        <span class="menu-title">Ajouter client</span>
-                    </a>
+                  <a class="nav-link" href="{{route('client.create')}}">
+                    <i class="mdi mdi-chart-bar menu-icon"></i>
+                    <span class="menu-title">Ajouter client</span>
+                  </a>
                 </li>
+                  @endcan
+        
+                  @can('manage-folder')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route("gestion.dossier")}}">
-                        <i class="mdi mdi-table-large menu-icon"></i>
-                        <span class="menu-title">Gestion des dossiers</span>
-                    </a>
+                  <a class="nav-link" href="{{route("gestion.dossier")}}">
+                    <i class="mdi mdi-table-large menu-icon"></i>
+                    <span class="menu-title">Gestion des dossiers</span>
+                  </a>
                 </li>
-                <li class="nav-item">
-          <span class="nav-link" href="#">
-            <span class="menu-title">Docs</span>
-          </span>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://www.bootstrapdash.com/demo/breeze-free/documentation/documentation.html">
-                        <i class="mdi mdi-file-document-box menu-icon"></i>
-                        <span class="menu-title">Documentation</span>
-                    </a>
-                </li>
+                  @endcan
+                  @can('manage-recouvreur')
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{route("gestion.recouvreurs")}}">
+                          <i class="mdi mdi-table-large menu-icon"></i>
+                          <span class="menu-title">Gestion des Recouvreurs</span>
+                      </a>
+                  </li>
+        @endcan
                 <li class="nav-item sidebar-actions">
                     <div class="nav-link">
                         <div class="mt-4">
-                            <div class="border-none">
-                                <p class="text-black">Notification</p>
-                            </div>
+                            
                             <ul class="mt-4 pl-0">
-                                <li><a href="/deconnexion"> Sign Out</a></li>
+                                <li><a href="/deconnexion"> Deconnexion</a></li>
                             </ul>
                         </div>
                     </div>
@@ -242,7 +244,11 @@
                         </div>
                     </div>
 
-
+@if(session()->has('info'))
+<script>
+    swal("un remboursement", "{{session('info')}}", "success")
+                         </script>
+@endif
                     <div class="row">
                         <div class="col-xl-8 col-sm-6 grid-margin stretch-card">
                             <div class="card">
@@ -287,19 +293,7 @@
 
 
 
-                                                    <!-- Button trigger modal -->
-{{--                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--}}
-{{--                                                        Launch--}}
-{{--                                                    </button>--}}
-                                                    <!-- Full screen modal -->
-{{--                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
-{{--                                                        <div class="modal-dialog">--}}
-{{--                                                            <div class="modal-content">--}}
-{{--                                                                <div class="modal-header">--}}
-{{--                                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>--}}
-{{--                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
-{{--                                                                </div>--}}
-
+                                                    
                                                                 <form method="post" action="{{route('gestion.remboursement')}}">
                                                                     @csrf
 
@@ -351,94 +345,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6 grid-margin stretch-card">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title text-black">Recouvreurs en action</h4>
-                                    <p class="text-muted">All contacts</p>
-                                    <div class="row pt-2 pb-1">
-                                        <div class="col-12 col-sm-7">
-                                            <div class="row">
-                                                <div class="col-4 col-md-4">
-                                                    <img class="customer-img" src="assets/images/faces/face22.jpg" alt="" />
-                                                </div>
-                                                <div class="col-8 col-md-8 p-sm-0">
-                                                    <h6 class="mb-0">Cecelia Cooper</h6>
-                                                    <p class="text-muted font-12">05:58AM</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-5 pl-0">
-                                            <canvas id="areaChart1"></canvas>
-                                        </div>
-                                    </div>
-                                    <div class="row py-1">
-                                        <div class="col-sm-7">
-                                            <div class="row">
-                                                <div class="col-4 col-sm-4">
-                                                    <img class="customer-img" src="assets/images/faces/face25.jpg" alt="" />
-                                                </div>
-                                                <div class="col-8 col-sm-8 p-sm-0">
-                                                    <h6 class="mb-0">Victor Watkins</h6>
-                                                    <p class="text-muted font-12">05:28AM</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-5 pl-0">
-                                            <canvas id="areaChart2"></canvas>
-                                        </div>
-                                    </div>
-                                    <div class="row py-1">
-                                        <div class="col-sm-7">
-                                            <div class="row">
-                                                <div class="col-4 col-sm-4">
-                                                    <img class="customer-img" src="assets/images/faces/face15.jpg" alt="" />
-                                                </div>
-                                                <div class="col-8 col-sm-8 p-sm-0">
-                                                    <h6 class="mb-0">Ada Burgess</h6>
-                                                    <p class="text-muted font-12">05:57AM</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-5 pl-0">
-                                            <canvas id="areaChart3"></canvas>
-                                        </div>
-                                    </div>
-                                    <div class="row py-1">
-                                        <div class="col-sm-7">
-                                            <div class="row">
-                                                <div class="col-4 col-sm-4">
-                                                    <img class="customer-img" src="assets/images/faces/face5.jpg" alt="" />
-                                                </div>
-                                                <div class="col-8 col-sm-8 p-sm-0">
-                                                    <h6 class="mb-0">Dollie Lynch</h6>
-                                                    <p class="text-muted font-12">05:59AM</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-5 pl-0">
-                                            <canvas id="areaChart4"></canvas>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-7">
-                                            <div class="row">
-                                                <div class="col-4 col-sm-4">
-                                                    <img class="customer-img" src="assets/images/faces/face2.jpg" alt="" />
-                                                </div>
-                                                <div class="col-8 col-sm-8 p-sm-0">
-                                                    <h6 class="mb-0">Harry Holloway</h6>
-                                                    <p class="text-muted font-12 mb-0">05:13AM</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-5 pl-0">
-                                            <canvas id="areaChart5" height="100"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
 
                     <div class="row">

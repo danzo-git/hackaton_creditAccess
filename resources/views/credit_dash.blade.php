@@ -74,13 +74,14 @@
           </a>
         </li>
           @endcan
+          @can('manage-recouvreur')
           <li class="nav-item">
               <a class="nav-link" href="{{route("gestion.recouvreurs")}}">
                   <i class="mdi mdi-table-large menu-icon"></i>
                   <span class="menu-title">Gestion des Recouvreurs</span>
               </a>
           </li>
-
+@endcan
         <li class="nav-item sidebar-actions">
           <div class="nav-link">
             <div class="mt-4">

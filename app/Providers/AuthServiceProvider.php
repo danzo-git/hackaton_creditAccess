@@ -54,6 +54,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('manage-folder',function($user){
             return $user->hasAnyRole(['admin','recouvreur'])  ;
         });
+        Gate::define('manage-recouvreur',function($user){
+            return $user->hasAnyRole(['admin'])  ;
+        });
         Gate::define('edit-users',function($user){
 
             return $user->hasAnyRole(['g-compte','admin','rh'])  ;

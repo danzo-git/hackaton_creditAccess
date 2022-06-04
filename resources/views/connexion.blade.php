@@ -1,4 +1,4 @@
-@if(\Auth()->user())
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,9 +91,9 @@ img{
 </body>
 
 
-@else
+
 <script>
-    window.location.href="/connexion"
+
 </script>
-@endif
 </html>
+
