@@ -65,7 +65,7 @@
                               data-bs-toggle="dropdown"></i>
                       </li> 
                       <li class="nav-item dropdown submenu ">
-                          <a href="#" class="nav-link dropdown-toggle text-dark " role="button" data-bs-toggle="dropdown"
+                          <a href="{{route('form.connexion')}}" class="nav-link dropdown-toggle text-dark " role="button" data-bs-toggle="dropdown"
                               aria-haspopup="true" aria-expanded="false" >Se Connecter</a>
                           <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="true"
                               data-bs-toggle="dropdown"></i>

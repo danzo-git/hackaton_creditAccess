@@ -442,13 +442,13 @@ public function dossier(){
     public function verifie_status($id){
         $status=\DB::table("dossiers")->first();
        // dd($status->status);
-        if($status->date_fin>now()){
+        if($status->date_fin<now()){
         \DB::table('dossiers')->where('id',$id)->update(['status'=>1]);
             $status=\DB::table('dossiers')->get()->where('id',$id)->first();
            // $stat;
 
             return redirect()-> back()->with('message','le delai a ete depassé');
-        }{
+        }else{
           $stat=  \DB::table('dossiers')->where('id',$id)->update(['status'=>0]);
 
             return redirect()-> back()->with('message','le delai a ete depassé',compact('stat'));
@@ -506,7 +506,16 @@ public function dossier(){
             
     }
 
+public function profile($id){
+   
+// dd($queries);
+$clients=\DB::table('clients')->where('id',$id)->get();
+// dd($clients);
+$comptes=\DB::table('comptes')->where('id',$id)->get();
 
+$dossiers=\DB::table('dossiers')->where('id_client',$id)->get();
+    return view('profile',compact("dossiers","comptes","clients"));
+}
 
 }
 

@@ -36,7 +36,7 @@ route::get('/info/{id}/','BailController@client')->name('client.info');
 route::get('/accueil',"BailController@accueil")->name('accueil');
 route::get('/client/{id}','BailController@connexion_client')->name('info.client');
 
-
+route::get('/profile/{id}','BailController@profile')->name('gestion.profile');
 // route::post('/fournisseur_page','BailController@finsertion')->name('fournisseur.page');
 route::get('connexion','BailController@connexion')->name('form.connexion');
 Route::post('connexion_client','BailController@connexion_client')->name('client.connexion');

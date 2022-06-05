@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{{asset('style/assets/css/style.css')}}" />
     <link rel="shortcut icon" href="{{('style/assets/images/favicon.png')}}" />
     <!-- wizard form -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <link rel="stylesheet" href="{{asset('style/assets/vendors/jquery-smartwizard/dist/css/smart_wizard.min.c')}}ss">
     <link rel="stylesheet" href="{{asset('style/assets/vendors/jquery-nice-select/css/nice-select.c')}}ss">
   </head>
@@ -29,13 +31,12 @@
           <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
               <div class="nav-profile-image">
-                <img src="../assets/images/faces/face1.jpg" alt="profile" />
-                <span class="login-status online"></span>
+                
                 <!--change to offline or busy as needed-->
               </div>
               <div class="nav-profile-text d-flex flex-column pr-3">
-                <span class="font-weight-medium mb-2"> {{$clients->nom}}</span>
-                <span class="font-weight-normal">$8,753.00</span>
+                <span class="font-weight-medium mb-2">client: {{$clients->nom}}</span>
+                {{-- <span class="font-weight-normal">$8,753.00</span> --}}
               </div>
               
             </a>
@@ -47,9 +48,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link"  href="{{route('gestion.profile',$clients->id)}}" aria-expanded="false" aria-controls="ui-basic">
               <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-              <span class="menu-title">Mon profile</span>
+              <span class="menu-title"> Mon profile </span>
             
             </a>
             
@@ -144,15 +145,7 @@
                                     <li><a class="nav-link" href="#wizard_Service">
                                         <span>1</span>
                                     </a></li>
-                                    {{-- <li><a class="nav-link" href="#wizard_Time">
-                                        <span>2</span>
-                                    </a></li> --}}
-                                    {{-- <li><a class="nav-link" href="#wizard_Details">
-                                        <span>3</span>
-                                    </a></li>
-                                    <li><a class="nav-link" href="#wizard_Payment">
-                                        <span>4</span>
-                                    </a></li> --}}
+                                   
                                 </ul>
                                 @if(session()->has('info')) 
                                 <script>

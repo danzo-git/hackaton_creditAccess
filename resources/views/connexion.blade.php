@@ -34,7 +34,7 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
-                                                <input id="forgetAnswer" name="mdp" placeholder="mot de password" class="form-control"  type="text">
+                                                <input id="forgetAnswer" name="mdp" placeholder="mot de passe" class="form-control"  type="text">
                                             </div>
                                         </div>
                                         <div class="form-group">
